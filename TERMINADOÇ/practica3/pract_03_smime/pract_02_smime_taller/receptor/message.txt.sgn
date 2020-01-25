@@ -1,0 +1,57 @@
+MIME-Version: 1.0
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature"; micalg="sha-256"; boundary="----26BA38EEF95FE69BF79A8497596F1AB1"
+
+This is an S/MIME signed message
+
+------26BA38EEF95FE69BF79A8497596F1AB1
+Content-Type: text/plain
+
+This story is about the adventures of Captain Nemo and his crew aboard the submarine, Nautilus. One day ships start sinking, particularly ones dealing with war. Survivors think it is a big whale. A harpoon ship goes out to kill it, but finds out that the whale is actually the Nautilus. The most interesting part of this book was probably the Nautilus itself. It is shaped to look like a fish, with a large metal fin on top used to ram and sink the ships. The camouflage of the boat being shaped like a whale works, up until the part where the Nautilus takes on a few passengers from one of the sinking ships. Another intriguing part of this book was Captain Nemo. He is the kind of character that you neither like nor dislike. I say this, because of some of Nemo’s actions. Captain Nemo hates war, and throughout the book, he uses his submarine to destroy all kinds of war related ships. You would like him for trying to put an end to war, but dislike his method (destroying ships and killing innocen
+
+------26BA38EEF95FE69BF79A8497596F1AB1
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+
+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
+6ktIYQeatAvsKZ4v6kPwvZFLhYNz6Vm3EWfo4Q==
+
+------26BA38EEF95FE69BF79A8497596F1AB1--
+

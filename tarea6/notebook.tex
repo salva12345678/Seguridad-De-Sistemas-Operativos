@@ -1,0 +1,664 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Tarea\_RSA}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{alfabeto}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ ABCDEFGHIJKLMNOPQRSTUVWXYZ}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{L}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{alfabeto}\PY{p}{)}
+        \PY{k}{def} \PY{n+nf}{codifica\PYZus{}letra}\PY{p}{(}\PY{n}{letra}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{alfabeto}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{letra}\PY{p}{)}
+        \PY{k}{def} \PY{n+nf}{decodifica\PYZus{}letra}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{alfabeto}\PY{p}{[}\PY{n}{n}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{codifica\PYZus{}cadena}\PY{p}{(}\PY{n}{texto}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{p}{[}\PY{n}{codifica\PYZus{}letra}\PY{p}{(}\PY{n}{c}\PY{p}{)} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{texto}\PY{p}{]}
+        \PY{k}{def} \PY{n+nf}{decodifica\PYZus{}cadena}\PY{p}{(}\PY{n}{lista}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{n}{decodifica\PYZus{}letra}\PY{p}{(}\PY{n}{j}\PY{p}{)} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{lista}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{encripta\PYZus{}RSA}\PY{p}{(}\PY{n}{lista}\PY{p}{,}\PY{n}{N}\PY{p}{,}\PY{n}{e}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{p}{[}\PY{n}{power\PYZus{}mod}\PY{p}{(}\PY{n}{numero}\PY{p}{,}\PY{n}{e}\PY{p}{,}\PY{n}{N}\PY{p}{)} \PY{k}{for} \PY{n}{numero} \PY{o+ow}{in} \PY{n}{lista}\PY{p}{]}
+        \PY{k}{def} \PY{n+nf}{desencripta\PYZus{}RSA}\PY{p}{(}\PY{n}{lista}\PY{p}{,}\PY{n}{N}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{p}{[}\PY{n}{power\PYZus{}mod}\PY{p}{(}\PY{n}{numero}\PY{p}{,}\PY{n}{d}\PY{p}{,}\PY{n}{N}\PY{p}{)} \PY{k}{for} \PY{n}{numero} \PY{o+ow}{in} \PY{n}{lista}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{tamanyo} \PY{o}{=} \PY{l+m+mf}{1e30}
+         \PY{n}{K}\PY{o}{=}\PY{n}{randint}\PY{p}{(}\PY{n}{tamanyo}\PY{p}{,}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{tamanyo}\PY{p}{)}
+         \PY{n}{p}\PY{o}{=}\PY{n}{next\PYZus{}prime}\PY{p}{(}\PY{n}{K}\PY{p}{)}
+         \PY{n}{K}\PY{o}{=}\PY{n}{randint}\PY{p}{(}\PY{n}{tamanyo}\PY{p}{,}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{tamanyo}\PY{p}{)}
+         \PY{n}{q}\PY{o}{=}\PY{n}{next\PYZus{}prime}\PY{p}{(}\PY{n}{K}\PY{p}{)}
+         \PY{n}{N}\PY{o}{=}\PY{n}{p}\PY{o}{*}\PY{n}{q}
+         \PY{k}{print} \PY{n}{p}\PY{p}{,}\PY{n}{q}\PY{p}{,}\PY{n}{N}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1397908773240007558587233851823 1007580957928880740116332878087 1408506260838353342470851821922795196749485774658684481702601
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{phi} \PY{o}{=} \PY{p}{(}\PY{n}{p}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{q}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{e} \PY{o}{=} \PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{phi}\PY{p}{)}
+         \PY{k}{while} \PY{n}{gcd}\PY{p}{(}\PY{n}{e}\PY{p}{,}\PY{n}{phi}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{1}\PY{p}{:}
+             \PY{n}{e} \PY{o}{=} \PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{phi}\PY{p}{)}
+         \PY{k}{print} \PY{n}{e}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1218858427009975133440574044156175904284107099253262808342883
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{d}\PY{o}{=}\PY{n}{inverse\PYZus{}mod}\PY{p}{(}\PY{n}{e}\PY{p}{,}\PY{n}{phi}\PY{p}{)}
+         \PY{k}{print} \PY{n}{d}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1178629126785814075961413178933614924169910812976537211719671
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{alfabeto} \PY{o}{=} \PY{l+s+sa}{u}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsh{}\PYZdl{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZam{}}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{()*+,\PYZhy{}./:;\PYZlt{}=\PYZgt{}?@[}\PY{l+s+se}{\PYZbs{}\PYZbs{}}\PY{l+s+s1}{]\PYZca{}\PYZus{}`\PYZob{}|\PYZcb{}\PYZti{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}x0b}\PY{l+s+se}{\PYZbs{}x0c}\PY{l+s+se}{\PYZbs{}r}\PY{l+s+s1}{0123456789áéíóúñ}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{n}{L}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{alfabeto}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{cable}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C O N F I D E N T I A L}\PY{l+s+s2}{\PYZdq{}} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{k}{def} \PY{n+nf}{bloque2numero}\PY{p}{(}\PY{n}{bloque}\PY{p}{)}\PY{p}{:}
+             \PY{n}{numero} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{bloque}\PY{p}{:}
+                 \PY{n}{numero} \PY{o}{=} \PY{n}{numero}\PY{o}{*}\PY{n}{L} \PY{o}{+} \PY{n}{k}
+             \PY{k}{return} \PY{n}{numero}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k}{def} \PY{n+nf}{decodifica\PYZus{}letra}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{alfabeto}\PY{p}{[}\PY{n}{n}\PY{p}{]}
+         
+         \PY{k}{def} \PY{n+nf}{numero2bloque}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n}{bloque}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{bloque}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZpc{}}\PY{k}{L})
+                 \PY{n}{n}\PY{o}{=}\PY{n}{n}\PY{o}{/}\PY{o}{/}\PY{n}{L}
+             \PY{n}{bloque}\PY{o}{.}\PY{n}{reverse}\PY{p}{(}\PY{p}{)}
+             \PY{k}{return} \PY{n}{bloque}
+         
+         \PY{k}{def} \PY{n+nf}{decodifica\PYZus{}mensaje}\PY{p}{(}\PY{n}{secuencia}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n}{bloques}\PY{o}{=}\PY{p}{[}\PY{n}{numero2bloque}\PY{p}{(}\PY{n}{numero}\PY{p}{,}\PY{n}{b}\PY{p}{)} \PY{k}{for} \PY{n}{numero} \PY{o+ow}{in} \PY{n}{secuencia}\PY{p}{]}
+             \PY{n}{numeros}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{b} \PY{o+ow}{in} \PY{n}{bloques}\PY{p}{:}
+                 \PY{n}{numeros}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{n}{b}\PY{p}{)}   \PY{c+c1}{\PYZsh{}extiende numeros con los numeros del bloque b}
+             \PY{n}{letras}\PY{o}{=}\PY{p}{[}\PY{n}{decodifica\PYZus{}letra}\PY{p}{(}\PY{n}{k}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{numeros}\PY{p}{]}
+             \PY{n}{mensaje}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{letras}\PY{p}{)}
+             \PY{k}{return} \PY{n}{mensaje}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{k}{def} \PY{n+nf}{codifica\PYZus{}mensaje}\PY{p}{(}\PY{n}{mensaje}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{:}
+             \PY{n}{letras} \PY{o}{=} \PY{p}{[}\PY{n}{codifica\PYZus{}letra}\PY{p}{(}\PY{n}{letra}\PY{p}{)} \PY{k}{for} \PY{n}{letra} \PY{o+ow}{in} \PY{n}{mensaje}\PY{p}{]}
+             \PY{n}{letras} \PY{o}{=} \PY{n}{letras} \PY{o}{+} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n+nb}{len}\PY{p}{(}\PY{n}{letras}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{b})
+             \PY{n}{n} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{letras}\PY{p}{)}
+             \PY{n}{bloques} \PY{o}{=} \PY{p}{[}\PY{n}{letras}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{n}{b}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{n}\PY{p}{,}\PY{n}{b}\PY{p}{)}\PY{p}{]}
+             \PY{n}{codigo} \PY{o}{=} \PY{p}{[}\PY{n}{bloque2numero}\PY{p}{(}\PY{n}{bloque}\PY{p}{)} \PY{k}{for} \PY{n}{bloque} \PY{o+ow}{in} \PY{n}{bloques}\PY{p}{]}
+             \PY{k}{return} \PY{n}{codigo}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{k}{def} \PY{n+nf}{encripta\PYZus{}mensaje}\PY{p}{(}\PY{n}{mensaje}\PY{p}{,} \PY{n}{clave\PYZus{}publica}\PY{p}{)}\PY{p}{:}
+             \PY{n}{N}\PY{p}{,}\PY{n}{e} \PY{o}{=} \PY{n}{clave\PYZus{}publica}
+             \PY{n}{b}   \PY{o}{=} \PY{n}{floor}\PY{p}{(} \PY{n}{log}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{o}{/}\PY{n}{log}\PY{p}{(}\PY{n}{L}\PY{p}{)} \PY{p}{)}
+             \PY{n}{mensaje\PYZus{}codificado} \PY{o}{=} \PY{n}{codifica\PYZus{}mensaje}\PY{p}{(}\PY{n}{mensaje}\PY{p}{,}\PY{n}{b}\PY{p}{)}
+             \PY{n}{mensaje\PYZus{}encriptado} \PY{o}{=} \PY{n}{encripta\PYZus{}RSA}\PY{p}{(}\PY{n}{mensaje\PYZus{}codificado}\PY{p}{,}\PY{n}{N}\PY{p}{,}\PY{n}{e}\PY{p}{)}
+             \PY{k}{return} \PY{n}{mensaje\PYZus{}encriptado}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{k}{def} \PY{n+nf}{desencripta\PYZus{}mensaje}\PY{p}{(}\PY{n}{secuencia}\PY{p}{,} \PY{n}{clave\PYZus{}privada}\PY{p}{)}\PY{p}{:}
+             \PY{n}{N}\PY{p}{,}\PY{n}{d}\PY{o}{=}\PY{n}{clave\PYZus{}privada}
+             \PY{n}{b}\PY{o}{=}\PY{n}{floor}\PY{p}{(} \PY{n}{log}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{o}{/}\PY{n}{log}\PY{p}{(}\PY{n}{L}\PY{p}{)} \PY{p}{)}
+             \PY{n}{mensaje\PYZus{}codificado} \PY{o}{=} \PY{n}{desencripta\PYZus{}RSA}\PY{p}{(}\PY{n}{secuencia}\PY{p}{,}\PY{n}{N}\PY{p}{,}\PY{n}{d}\PY{p}{)}
+             \PY{n}{mensaje\PYZus{}decodificado} \PY{o}{=} \PY{n}{decodifica\PYZus{}mensaje}\PY{p}{(}\PY{n}{mensaje\PYZus{}codificado}\PY{p}{,}\PY{n}{b}\PY{p}{)}
+             \PY{k}{return} \PY{n}{mensaje\PYZus{}decodificado}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{numeros}\PY{o}{=}\PY{n}{encripta\PYZus{}mensaje}\PY{p}{(}\PY{n}{cable}\PY{p}{,} \PY{p}{(}\PY{n}{N}\PY{p}{,}\PY{n}{e}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print} \PY{n}{numeros}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[883504417837808241042757485182401034608549200860742599151155]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k}{print} \PY{n}{desencripta\PYZus{}mensaje}\PY{p}{(}\PY{n}{numeros}\PY{p}{,}\PY{p}{(}\PY{n}{N}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C O N F I D E N T I A L      
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{rsa}\PY{p}{(}\PY{n}{bits}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} only prove correctness up to 1024 bits}
+             \PY{n}{proof} \PY{o}{=} \PY{p}{(}\PY{n}{bits} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{1024}\PY{p}{)}
+             \PY{n}{p} \PY{o}{=} \PY{n}{next\PYZus{}prime}\PY{p}{(}\PY{n}{ZZ}\PY{o}{.}\PY{n}{random\PYZus{}element}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{bits}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{proof}\PY{o}{=}\PY{n}{proof}\PY{p}{)}
+             \PY{n}{q} \PY{o}{=} \PY{n}{next\PYZus{}prime}\PY{p}{(}\PY{n}{ZZ}\PY{o}{.}\PY{n}{random\PYZus{}element}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{bits}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                     \PY{n}{proof}\PY{o}{=}\PY{n}{proof}\PY{p}{)}
+             \PY{n}{n} \PY{o}{=} \PY{n}{p}\PY{o}{*}\PY{n}{q}
+             \PY{n}{phi\PYZus{}n} \PY{o}{=} \PY{p}{(}\PY{n}{p}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{q}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{while} \PY{n+nb+bp}{True}\PY{p}{:}
+                 \PY{n}{e} \PY{o}{=} \PY{n}{ZZ}\PY{o}{.}\PY{n}{random\PYZus{}element}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{phi\PYZus{}n}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{gcd}\PY{p}{(}\PY{n}{e}\PY{p}{,}\PY{n}{phi\PYZus{}n}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:} \PY{k}{break}
+             \PY{n}{d} \PY{o}{=} \PY{n}{lift}\PY{p}{(}\PY{n}{Mod}\PY{p}{(}\PY{n}{e}\PY{p}{,}\PY{n}{phi\PYZus{}n}\PY{p}{)}\PY{o}{\PYZca{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{e}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{n}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{rsa}\PY{p}{(}\PY{l+m+mi}{1024}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} (62278099863096289203221032809635363884978989141893150748167829601452199754754322888351752249334381892997776259622222479401564493866666975589069795930669575861064929704677024474807785564519295809273661294479982361523074516986709633103431506992504528490434003999530539362053099944511515967469521256138254621479,
+          65359479704636677012183688369880532725039842582683411192094139380853096260237821855255276443764645188875133591558204710478837784266814772652867563111651745334928017740086791772317689780045515148426033492183545950066462056445654646401480856058601754543702464632257028378908847903304471861126568016477484809807,
+          100632741367962005589089579001988022222725099361361939374458461106800762214588623861825728127854563776452258775533057553325999264557250876667139429271867404474897658987120753944154833251175178443760671144714151222137468006127498692179560854938320044335349542492773649773398281523880129516634524719264384486481)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{encrypt}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{e}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{lift}\PY{p}{(}\PY{n}{Mod}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{o}{\PYZca{}}\PY{n}{e}\PY{p}{)}
+            
+        \PY{k}{def} \PY{n+nf}{decrypt}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{lift}\PY{p}{(}\PY{n}{Mod}\PY{p}{(}\PY{n}{c}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{o}{\PYZca{}}\PY{n}{d}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{e}\PY{p}{,}\PY{n}{d}\PY{p}{,}\PY{n}{n} \PY{o}{=} \PY{n}{rsa}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{e}\PY{p}{,}\PY{n}{d}\PY{p}{,}\PY{n}{n} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} (446401, 1623313, 2954431)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{c} \PY{o}{=} \PY{n}{encrypt}\PY{p}{(}\PY{l+m+mi}{130}\PY{p}{,}\PY{n}{e}\PY{p}{,}\PY{n}{n}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{c}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 373558
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{t}\PY{o}{=}\PY{n}{decrypt}\PY{p}{(}\PY{n}{c}\PY{p}{,}\PY{n}{d}\PY{p}{,}\PY{n}{n}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{t}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 130
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{encode}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{:}
+             \PY{n}{s} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+             \PY{k}{return} \PY{n+nb}{sum}\PY{p}{(}\PY{n+nb}{ord}\PY{p}{(}\PY{n}{s}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{256}\PY{o}{\PYZca{}}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{decode}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+             \PY{n}{n} \PY{o}{=} \PY{n}{Integer}\PY{p}{(}\PY{n}{n}\PY{p}{)}
+             \PY{n}{v} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{while} \PY{n}{n} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{v}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{chr}\PY{p}{(}\PY{n}{n} \PY{o}{\PYZpc{}} \PY{l+m+mi}{256}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{n} \PY{o}{/}\PY{o}{/}\PY{o}{=} \PY{l+m+mi}{256}     \PY{c+c1}{\PYZsh{} this replaces n by floor(n/256)}
+             \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{v}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{m} \PY{o}{=} \PY{n}{encode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Run away!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{m}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} 617488957642785060178
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{decode}\PY{p}{(}\PY{n}{m}\PY{p}{)} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 'Run away!'
+\end{Verbatim}
+            
+    \subsubsection{1.Emita una pareja de claves ,pública y privada para
+adherirse usted aun círculo RSA como usuario
+A.}\label{emita-una-pareja-de-claves-puxfablica-y-privada-para-adherirse-usted-aun-cuxedrculo-rsa-como-usuario-a.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{p} \PY{o}{=} \PY{l+m+mi}{11}
+        \PY{n}{q} \PY{o}{=} \PY{l+m+mi}{23}
+        \PY{n}{n} \PY{o}{=} \PY{n}{p} \PY{o}{*} \PY{n}{q}
+        \PY{n}{totient} \PY{o}{=} \PY{p}{(}\PY{n}{p}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{q}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{primo} \PY{o}{=} \PY{n}{gcd}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{totient}\PY{p}{)}
+        \PY{k}{print} \PY{n}{primo}
+        \PY{n}{primo} \PY{o}{=} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{inv} \PY{o}{=} \PY{l+m+mf}{3.}\PY{n}{inverse\PYZus{}mod}\PY{p}{(}\PY{n}{totient}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}clave publica (3,n)}
+        \PY{c+c1}{\PYZsh{}clave privada (inv, n)}
+        \PY{c+c1}{\PYZsh{}Mensaje = RSA = 17 18 0}
+        \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{17}
+        \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{18}
+        \PY{n}{c} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{n}{a1} \PY{o}{=} \PY{n}{a}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{\PYZpc{}} \PY{n}{n}
+        \PY{n}{b1} \PY{o}{=} \PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{\PYZpc{}} \PY{n}{n}
+        \PY{n}{c1} \PY{o}{=} \PY{n}{c}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3} \PY{o}{\PYZpc{}} \PY{n}{n}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{print} \PY{n}{a1}\PY{p}{,} \PY{n}{b1}\PY{p}{,} \PY{n}{c1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+106 13 0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}17³mod(n) = 106}
+        \PY{c+c1}{\PYZsh{}18³mod(n) = 13}
+        \PY{c+c1}{\PYZsh{}0³mod(253) = 0}
+        
+        \PY{c+c1}{\PYZsh{}DESCIFRADO}
+        \PY{c+c1}{\PYZsh{}106\PYZca{}inv(mod(n)) = 17}
+        \PY{c+c1}{\PYZsh{}13\PYZca{}inv(mod(n)) = 18}
+        \PY{c+c1}{\PYZsh{}0\PYZca{}inv(mod(n)) = 0}
+        \PY{n}{a2} \PY{o}{=} \PY{n}{a1}\PY{o}{*}\PY{o}{*}\PY{n}{inv} \PY{o}{\PYZpc{}} \PY{n}{n}
+        \PY{n}{b2} \PY{o}{=} \PY{n}{b1}\PY{o}{*}\PY{o}{*}\PY{n}{inv} \PY{o}{\PYZpc{}} \PY{n}{n}
+        \PY{n}{c2} \PY{o}{=} \PY{n}{c1}\PY{o}{*}\PY{o}{*}\PY{n}{inv} \PY{o}{\PYZpc{}} \PY{n}{n}
+        \PY{k}{print} \PY{n}{a2}\PY{p}{,} \PY{n}{b2}\PY{p}{,} \PY{n}{c2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+17 18 0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{p}{\PYZob{}}\PY{l+m+mi}{49569253}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{\PYZcb{}}
+         \PY{c+c1}{\PYZsh{}Asignamos a cada letra un número, A = 0, B = 1, ... , Z = 25}
+         \PY{c+c1}{\PYZsh{}Mensaje a cifrar (M): SEGURIDAD}
+         \PY{n}{M} \PY{o}{=} \PY{l+m+mi}{18} \PY{l+m+mi}{4} \PY{l+m+mi}{6} \PY{l+m+mi}{20} \PY{l+m+mi}{17} \PY{l+m+mi}{8} \PY{l+m+mi}{3} \PY{l+m+mi}{0} \PY{l+m+mi}{3} 
+         \PY{l+m+mi}{18}\PY{err}{³} \PY{o}{=} \PY{l+m+mi}{5832} \PY{n}{mod} \PY{l+m+mi}{49569253} \PY{o}{=} \PY{l+m+mi}{5832}
+         \PY{l+m+mi}{43}\PY{err}{³} \PY{o}{=} \PY{l+m+mi}{64} \PY{n}{mod} \PY{l+m+mi}{49569253} \PY{o}{=} \PY{l+m+mi}{64}
+         \PY{l+m+mi}{6}\PY{err}{³} \PY{o}{=} \PY{l+m+mi}{216} \PY{n}{mod} \PY{l+m+mi}{49569253} \PY{o}{=} \PY{l+m+mi}{216}
+         \PY{l+m+mi}{20}\PY{err}{³} \PY{o}{=} \PY{l+m+mi}{8000} \PY{n}{mod} \PY{l+m+mi}{49569253} \PY{o}{=} \PY{l+m+mi}{8000}
+         \PY{l+m+mi}{17}\PY{err}{³} \PY{o}{=} \PY{l+m+mi}{4913} \PY{n}{mod} \PY{l+m+mi}{49569253} \PY{o}{=} \PY{l+m+mi}{4913}
+         \PY{l+m+mi}{8}\PY{err}{³} \PY{o}{=} \PY{l+m+mi}{512} \PY{n}{mod} \PY{l+m+mi}{49569253} \PY{o}{=} \PY{l+m+mi}{512}
+         \PY{l+m+mi}{3}\PY{err}{³} \PY{o}{=} \PY{l+m+mi}{27} \PY{n}{mod} \PY{l+m+mi}{49569253} \PY{o}{=} \PY{l+m+mi}{27}
+         \PY{l+m+mi}{0}\PY{err}{³} \PY{o}{=} \PY{l+m+mi}{0} \PY{n}{mod} \PY{l+m+mi}{49569253} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{l+m+mi}{3}\PY{err}{³} \PY{o}{=} \PY{l+m+mi}{27} \PY{n}{mod} \PY{l+m+mi}{49569253} \PY{o}{=} \PY{l+m+mi}{27}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+          File "<ipython-input-11-e4c4ab1e2f09>", line 4
+        M = Integer(18) Integer(4) Integer(6) Integer(20) Integer(17) Integer(8) Integer(3) Integer(0) Integer(3)
+                              \^{}
+    SyntaxError: invalid syntax
+
+
+    \end{Verbatim}
+
+    \subsection{3.La clave pública de Alice en determinado círculo de
+usuarios RSA es〈49569253, 3〉. Cifre para ella un determinado mensaje m
+de su
+invención.}\label{la-clave-puxfablica-de-alice-en-determinado-cuxedrculo-de-usuarios-rsa-es49569253-3.-cifre-para-ella-un-determinado-mensaje-m-de-su-invenciuxf3n.}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

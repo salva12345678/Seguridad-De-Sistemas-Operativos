@@ -1,0 +1,802 @@
+alem_1516_leccion_01
+system:sage
+
+
+{{{id=1|
+# CONJUNTOS ORDENADOS (POSET) Y RETÍCULOS (LATTICE)
+///
+}}}
+
+{{{id=2|
+"""
+Para introducir un conjunto ordenado existen varios métodos:
+    1) Enumerar sus elementos y las relaciones a un paso que
+       establece con el resto de elementos del conjunto
+    2) Dar el conjunto de elementos del conjunto ordenado y
+       un "criterio" de relación a un paso de un elemento con 
+       el resto a través de una función booleana
+    3) Recurrir a un generador primitivo de sagemath 
+"""
+///
+}}}
+
+{{{id=3|
+# Ejemplo de enumeración de elementos y relaciones
+///
+}}}
+
+{{{id=5|
+CO1 = Poset({0:[2,3],1:[3],2:[4,5],3:[5],4:[],5:[6,7],6:[],7:[]})
+///
+}}}
+
+{{{id=7|
+CO1.plot()                  # da una imagen gráfica del conjunto, su diagrama de Hasse
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=8|
+# Ejercicio
+"""
+Introducir y pedir el diagrama de Hasse del conjunto ordenado CO2 que tiene
+los elementos: {0,1,2,3,4,5,6,7} y donde las relaciones a un paso son:
+    0 con 1,4 y 5
+    1 con 2,3 y 6
+    2 con 7
+    3 con 7
+    4 con 6
+    5 con 6
+    6 con 7
+"""
+///
+}}}
+
+{{{id=98|
+# Solución
+///
+}}}
+
+{{{id=99|
+# Fin de la solución
+///
+}}}
+
+{{{id=9|
+"""
+Ejemplo de descripción del conjunto de elementos y criterio booleano para 
+determinar las relaciones a un paso:
+    1) el conjunto básico es el de los divisores de 60, divisors(60)
+    2) el contraste booleano de relación a un paso se el método "divides"
+       que por ejemplo da "True" como respuesta a 2.divides(4) y "False"
+       como respuesta a 3.divides(4)
+"""
+///
+}}}
+
+{{{id=11|
+D60 = Poset((divisors(60), attrcall("divides")));
+///
+}}}
+
+{{{id=12|
+D60.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=15|
+# Ejercicio (resuelto)
+"""
+Construir el conjunto ordenado sobre partes del conjunto {0,1,2}
+con la relación de orden de la inclusión.
+"""
+///
+}}}
+
+{{{id=16|
+# Solución
+///
+}}}
+
+{{{id=17|
+B = Poset((Subsets([0,1,2]), attrcall("issubset")));
+///
+}}}
+
+{{{id=18|
+B.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=100|
+# Fin de la solución
+///
+}}}
+
+{{{id=19|
+"""
+Si la función contraste que queremos usar no está definida, podemos
+definirla y usarla. Por ejemplo el conjunto ordenado de los divisores
+de 36 podría darse así:
+"""
+///
+}}}
+
+{{{id=21|
+def f(m,n):
+    b = True
+    if n % m: 
+        b = False
+    return b
+///
+}}}
+
+{{{id=22|
+D36 = Poset((divisors(36),f))
+///
+}}}
+
+{{{id=23|
+D36.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=24|
+"""
+Con el método compare_elements(a,b) podemos comparar dos elementos, hay 
+4 respuestas posibles, -1 ó 0 ó 1 ó ninguna:
+    -) si no hay respuesta, no están relacionados
+    -) si la respuesta es  0, están relacionados y a = b
+    -) si la respuesta es -1, están relacionados y a < b
+    -) si la respuesta es  1, están relacionados y a > b
+"""
+///
+}}}
+
+{{{id=25|
+CO1.compare_elements(2,7) # en CO1 se tiene 2 < 7, luego -1
+///
+-1
+}}}
+
+{{{id=26|
+CO1.compare_elements(7,2) # en CO1 se tiene 7 > 2, luego  1
+///
+1
+}}}
+
+{{{id=27|
+CO1.compare_elements(4,7) # 4 y 7 no están relacionados en CO1, no hay respuesta
+///
+}}}
+
+{{{id=28|
+CO1.compare_elements(4,4) # en CO1 4 es igual 4
+///
+0
+}}}
+
+{{{id=30|
+"""
+Tenemos dos formas alternativas de recuperar el conjunto subyacente
+al conjunto ordenado (extensión lineal). 
+"""
+///
+}}}
+
+{{{id=31|
+CO1LE = CO1.list(); CO1LE
+///
+[1, 0, 2, 4, 3, 5, 6, 7]
+}}}
+
+{{{id=32|
+CO1LEAlt = CO1.linear_extension(); CO1LEAlt
+///
+[1, 0, 2, 4, 3, 5, 6, 7]
+}}}
+
+{{{id=33|
+"""
+Para saber la relación de alcance ascendente a un paso
+usamos el método cover_relations() 
+"""
+///
+}}}
+
+{{{id=34|
+CO1CR = CO1.cover_relations(); CO1CR
+///
+[[1, 3], [0, 2], [0, 3], [2, 4], [2, 5], [3, 5], [5, 6], [5, 7]]
+}}}
+
+{{{id=35|
+"""
+Para tener una descripción exhaustiva de todas las relaciones del
+conjunto ordenado usamos el método "relations()"
+"""
+///
+}}}
+
+{{{id=36|
+CO1R = CO1.relations(); CO1R           # relación alcance ascendente
+///
+[[1, 1], [1, 3], [1, 5], [1, 6], [1, 7], [0, 0], [0, 2], [0, 4], [0, 3], [0, 5], [0, 6], [0, 7], [2, 2], [2, 4], [2, 5], [2, 6], [2, 7], [4, 4], [3, 3], [3, 5], [3, 6], [3, 7], [5, 5], [5, 6], [5, 7], [6, 6], [7, 7]]
+}}}
+
+{{{id=37|
+CO1.maximal_elements()   # lista los elementos que son maximales en el conjunto
+///
+[4, 6, 7]
+}}}
+
+{{{id=38|
+CO1.minimal_elements()   # lista los elementos que son minimales en el conjunto
+///
+[1, 0]
+}}}
+
+{{{id=41|
+"""
+Los métodos "bottom" y "top" dan el mínimo y el máximo, respectivamente,
+del conjunto ordenado, si existen
+"""
+///
+}}}
+
+{{{id=39|
+CO1.bottom(); CO1.top() # CO1 no tiene ni elemento máximo ni mínimo
+///
+}}}
+
+{{{id=40|
+# Ejercicio:
+"""
+Si existen, calcular el mínimo y el máximo de CO2
+"""
+///
+}}}
+
+{{{id=101|
+# Solución
+///
+}}}
+
+{{{id=102|
+# Fin de Solución
+///
+}}}
+
+{{{id=43|
+"""
+Podemos calcular el conjunto ordenado basado en un 
+subconjunto dado del conjunto ordenado.
+"""
+///
+}}}
+
+{{{id=42|
+CO1S = CO1.subposet([0,3,4]) # se eligen los elementos y heredan la relación de orden
+///
+}}}
+
+{{{id=44|
+CO1S.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=45|
+# Retículos
+///
+}}}
+
+{{{id=46|
+"""
+Los retículos (lattice) son un caso particular de conjuntos ordenados. Para serlo, 
+cualquier pareja de elementos del conjunto ordenado debe tener supremo e ínfimo.
+"""
+///
+}}}
+
+{{{id=47|
+CO1.is_lattice()                  # CO1 no es retículo
+///
+False
+}}}
+
+{{{id=48|
+D60.is_lattice()                  # D60 sí es retículo
+///
+True
+}}}
+
+{{{id=49|
+# Ejercicio:
+"""
+Determinar si CO2 es retículo o no
+"""
+///
+}}}
+
+{{{id=103|
+# Solución
+///
+}}}
+
+{{{id=104|
+# Fin de Solución
+///
+}}}
+
+{{{id=50|
+"""
+Sin embargo, D60 no fue definido como retículo, por lo que
+para poderle aplicar los métodos de sagemath dados para retículos
+hay que "importar" a estructura de retículo el conjunto ordenado.
+"""
+///
+}}}
+
+{{{id=51|
+L60 = LatticePoset(D60)
+///
+}}}
+
+{{{id=52|
+L60.linear_extension()
+///
+[1, 2, 4, 3, 6, 12, 5, 15, 10, 20, 30, 60]
+}}}
+
+{{{id=53|
+L60.meet(15,12)    # es el ínfimo de 15 y 12 en L60
+///
+3
+}}}
+
+{{{id=54|
+L60.join(4,3)    # es el supremo de 15 y 12 en L60
+///
+12
+}}}
+
+{{{id=55|
+"""
+Sobre retículos podemos hacer muchas preguntas
+"""
+///
+}}}
+
+{{{id=56|
+L60.is_atomic()
+///
+False
+}}}
+
+{{{id=57|
+L60.is_chain()
+///
+False
+}}}
+
+{{{id=58|
+L60.is_distributive()
+///
+True
+}}}
+
+{{{id=59|
+L60.is_complemented()
+///
+False
+}}}
+
+{{{id=60|
+L60.complements()     # "dice" cuáles elementos del conjunto son complementados
+///
+[11, None, 7, 9, None, 6, 5, 2, None, 3, None, 0]
+}}}
+
+{{{id=62|
+"""
+Se puede hacer directamente la definición de retículo sin pasar 
+previamente por la de conjunto ordenado.
+"""
+///
+}}}
+
+{{{id=63|
+L4 = LatticePoset({0:[1,4,5],1:[2,3,6],2:[7],3:[7],4:[6],5:[6],6:[7]})
+///
+}}}
+
+{{{id=61|
+# Ejercicio:
+"""
+Considerar el retículo:
+    
+    L4 = LatticePoset({0:[1,4,5],1:[2,3,6],2:[7],3:[7],4:[6],5:[6],6:[7]})
+
+y responder a las preguntas:
+    1) ¿Cuál es el supremo y el ínfimo de 2 y 4 en L4?
+    2) ¿Es L4 atómico?
+    3) ¿Es L4 una cadena?
+    4) ¿Es L4 distributivo?
+    5) ¿Es L4 complementado?
+    6) ¿Cuáles son los elementos con complemento de L4? Explicar la respuesta.
+"""
+///
+}}}
+
+{{{id=105|
+# Solución
+///
+}}}
+
+{{{id=106|
+# Fin de Solución
+///
+}}}
+
+{{{id=64|
+# Retículos cuya generación está implementada en sagemath
+///
+}}}
+
+{{{id=107|
+"""
+Los retículos más pequeños que no son distributivos son 
+          pentagono         y         diamante5
+"""
+///
+}}}
+
+{{{id=65|
+pentagono = Posets.PentagonPoset(); pentagono
+///
+Finite lattice containing 5 elements
+}}}
+
+{{{id=67|
+pentagono.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=68|
+pentagono.is_distributive()
+///
+False
+}}}
+
+{{{id=69|
+pentagono.is_distributive()
+///
+False
+}}}
+
+{{{id=70|
+diamante5 = Posets.DiamondPoset(5); diamante5
+///
+Finite lattice containing 5 elements
+}}}
+
+{{{id=71|
+diamante5.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=72|
+diamante5.is_distributive()
+///
+False
+}}}
+
+{{{id=73|
+R = Posets.RandomPoset(8,.15)   # genera un Poset aleatorio con 17 vértices con probabilidad .15
+///
+}}}
+
+{{{id=74|
+R.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=75|
+C4 = Posets.ChainPoset(4) # genera el Poset que es la cadena de 4 elementos
+///
+}}}
+
+{{{id=76|
+C4.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=77|
+A4 = Posets.AntichainPoset(3);
+///
+}}}
+
+{{{id=78|
+K4 = Posets.BooleanLattice(4) # Posets.BooleanLattice(n) álgebra de Boole con 2^n elementos
+///
+}}}
+
+{{{id=79|
+K4.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=80|
+P4 = Posets.IntegerPartitions(4); P4 # construye el conjunto de las particiones del número 4
+///
+Finite poset containing 5 elements
+}}}
+
+{{{id=81|
+P4.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=82|
+B = posets.BooleanLattice(2)
+///
+}}}
+
+{{{id=83|
+P4B = P4.product(B) ; P4B.plot()     # es el retículo producto de P4 con B
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=84|
+P4B.is_lattice(); P4BL = LatticePoset(P4B)
+///
+True
+}}}
+
+{{{id=85|
+P4BL.is_atomic()
+///
+False
+}}}
+
+{{{id=86|
+P4BL.is_distributive()
+///
+True
+}}}
+
+{{{id=87|
+B4 = Posets.BooleanLattice(4); P4BL.is_isomorphic(B4)
+///
+False
+}}}
+
+{{{id=88|
+B2 = Posets.BooleanLattice(2); B2B2 = B2.product(B2); B2xB2 = LatticePoset(B2B2); B2xB2.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=89|
+B2xB2.is_isomorphic(B4)
+///
+True
+}}}
+
+{{{id=90|
+B = LatticePoset((Subsets([2,2,3]), attrcall("issubset")));
+///
+}}}
+
+{{{id=91|
+B2 = Posets.BooleanLattice(2); B.is_isomorphic(B2)
+///
+True
+}}}
+
+{{{id=116|
+# Otros
+///
+}}}
+
+{{{id=118|
+L60 = LatticePoset((divisors(60), attrcall("divides")));
+D60 = LatticePoset(L60);
+L75 = LatticePoset((divisors(75), attrcall("divides")));
+D75 = LatticePoset(L75);
+L4500 = LatticePoset((divisors(4500), attrcall("divides"))); 
+D4500 = LatticePoset(L4500);
+D60D75 = D60.product(D75); 
+D60xD75 = LatticePoset(D60D75);
+D60xD75.is_isomorphic(D4500)
+///
+False
+}}}
+
+{{{id=121|
+L15 = LatticePoset((divisors(15), attrcall("divides")));
+D15 = LatticePoset(L15);
+L6 = LatticePoset((divisors(6), attrcall("divides")));
+D6 = LatticePoset(L6);
+L90 = LatticePoset((divisors(90), attrcall("divides")));
+D90 = LatticePoset(L90);
+D15D6 = D15.product(D6); 
+D15xD6 = LatticePoset(D15D6);
+D15xD6.is_isomorphic(D90)
+///
+False
+}}}
+
+{{{id=119|
+L20 = LatticePoset((divisors(20), attrcall("divides")));
+D20 = LatticePoset(L20);
+L9 = LatticePoset((divisors(9), attrcall("divides")));
+D9 = LatticePoset(L9);
+L180 = LatticePoset((divisors(180), attrcall("divides"))); 
+D180 = LatticePoset(L180);
+D20D9 = D20.product(D9); 
+D20xD9 = LatticePoset(D20D9);
+D20xD9.is_isomorphic(D180)
+///
+True
+}}}
+
+{{{id=120|
+L10 = LatticePoset((divisors(10), attrcall("divides")));
+D10 = LatticePoset(L10);
+L21 = LatticePoset((divisors(21), attrcall("divides")));
+D21 = LatticePoset(L21);
+L210 = LatticePoset((divisors(210), attrcall("divides"))); 
+D210 = LatticePoset(L210);
+D10D21 = D10.product(D21); 
+D10xD21 = LatticePoset(D10D21);
+D10xD21.is_isomorphic(D210)
+///
+True
+}}}
+
+{{{id=122|
+D15xD6.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=123|
+D90.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=124|
+D20xD9.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=125|
+D180.plot()
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=92|
+# Ejercicios
+///
+}}}
+
+{{{id=93|
+# Ejercicio:
+"""
+Encontrar tres números naturales distintos K, N, M y sus retículos tales que:
+    1) LatticePoset(divisors(K),f) sea una cadena de 10 elementos
+    2) LatticePoset(divisors(M),f) sea un álgebra de Boole de 10 átomos
+    3) LatticePoset(divisors(N),f) sea un álgebra de Boole isomorfa, aunque distinta, 
+       a LatticePoset(divisors(M),f)
+Aquí "f" es una función booleana binaria con el mismo comportamiento que el método 
+"divides" (se puede usar éste directamente). 
+"""
+///
+}}}
+
+{{{id=108|
+# Solución
+///
+}}}
+
+{{{id=109|
+# Fin de Solución
+///
+}}}
+
+{{{id=94|
+# Ejercicio
+"""
+Elegir dos números primos distintos p y q. Construir los conjuntos ordenados:
+    1) <D(p^2),|>
+    2) <D(pq),|>
+    3) <D(p^2q),|>
+    4) <D(p^2q^2),|>
+    5) <D(p^3q),|>
+    5) <D(p^3q^2),|>
+Dibujar los respectivos diagramas de Hasse y decir si alguno es totalmente ordenado. Definir
+ahora los conjuntos ordenados:
+    1) D(p) x D(p)
+    2) D(p) x D(q)
+    3) D(p^2) x D(q)
+    4) D(p^2) x D(q^2)
+    5) D(p^3) x D(q)
+    6) D(p^3) x D(q^2)
+y comparar cada uno con el anterior del mismo número de apartado.
+"""
+///
+}}}
+
+{{{id=110|
+# Solución
+///
+}}}
+
+{{{id=111|
+# Fin de Solución
+///
+}}}
+
+{{{id=95|
+# Ejercicio
+"""
+Dibujar los diagramas de Hasse de: 
+    D(20) × D(9), 
+    D(180), 
+    D(10) × D(21), 
+    D(210), 
+    D(6) × D(15),
+    D(90), 
+    D(60) × D(75), 
+    D(4500).
+Inspirándose en lo anterior, decir qué condiciones deben cumplir m y n para 
+que los retículos D(m) × D(n) y D(m · n) sean isomorfos.
+"""
+///
+}}}
+
+{{{id=112|
+# Solución
+///
+}}}
+
+{{{id=113|
+# Fin de Solución
+///
+}}}
+
+{{{id=96|
+# Ejercicio:
+"""
+Definir una función, digamos "isSubLattice(L,lst)" que dado un retículo L 
+y una lista lst de elementos, dé un mensaje de error si algunos
+de los elementos de lst no lo son del retículo y, como función booleana, 
+responda "True" si, y sólo si, los elementos de lst forman un subretículo de L.
+"""
+///
+}}}
+
+{{{id=97|
+# Solución
+///
+}}}
+
+{{{id=114|
+# Fin de Solución
+///
+}}}

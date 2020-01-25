@@ -1,0 +1,22 @@
+emisor:
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:3 -out privkey-alice.pem
+
+openssl pkey -in privkey-alice.pem -out pubkey-alice.pem -pubout
+
+openssl dgst -sha256 -sign privkey-alice.pem -out sign-alice.bin message_alice.txt
+
+
+
+crear el fichero en alice
+
+openssl pkeyutl -encrypt -in message_alice.txt -pubin -inkey pubkey-bob.pem -out ciphertext-alice.bin
+
+
+receptor:
+
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:3 -out privkey-bob.pem
+
+openssl pkey -in privkey-bob.pem -out pubkey-bob.pem -pubout
+
+
+openssl pkeyutl -decrypt -in ciphertext-alice.bin -inkey privkey-IDR.pem -out received-ID.txt

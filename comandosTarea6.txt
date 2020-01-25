@@ -1,0 +1,123 @@
+-----1 y 2-----
+
+p = 11
+q = 23
+n = p * q
+totient = (p-1)*(q-1)
+#entero e tal que 1 < e < totient y MCD(totient,e) = 1
+#usaremos el 3
+primo = gcd(3,totient)
+print primo
+primo = 3
+#se calcula el inverso de e en modulo φ(N)
+inv = 3.inverse_mod(totient)
+#clave publica (3,n)
+#clave privada (inv, n)
+#Mensaje = RSA = 17 18 0
+#CIFRADO
+a = 17
+b = 18
+c = 0
+a1 = a**3 % n
+b1 = b**3 % n
+c1 = c**3 % n
+print a1, b1, c1
+
+#17³mod(n) = 106
+#18³mod(n) = 13
+#0³mod(253) = 0
+
+#DESCIFRADO
+#106^inv(mod(n)) = 17
+#13^inv(mod(n)) = 18
+#0^inv(mod(n)) = 0
+
+a2 = a1**inv % n
+b2 = b1**inv % n
+c2 = c1**inv % n
+print a2, b2, c2
+
+-----3-----
+{49569253, 3}
+Asignamos a cada letra un número, A = 0, B = 1, ... , Z = 25
+Mensaje a cifrar (M): SEGURIDAD
+M = 18 4 6 20 17 8 3 0 3 
+18³ = 5832 mod 49569253 = 5832
+43³ = 64 mod 49569253 = 64
+6³ = 216 mod 49569253 = 216
+20³ = 8000 mod 49569253 = 8000
+17³ = 4913 mod 49569253 = 4913
+8³ = 512 mod 49569253 = 512
+3³ = 27 mod 49569253 = 27
+0³ = 0 mod 49569253 = 0
+3³ = 27 mod 49569253 = 27
+
+Mensaje cifrado (C)= 5832 64 216 8000 4913 512 0 27
+
+##############SAGE
+n = 49569253
+primo = 3
+#RSA = 17 18 0
+r = 17
+s = 18
+a = 0
+r1 = r**primo % n
+s1 = s**primo % n
+a1 = a**primo % n
+print r1, s1, a1
+
+
+-------4-------
+https://www.dcode.fr/modular-exponentiation
+https://planetcalc.com/3298/ //para calcular el par de euclides
+Pagina 107 spsi lectures
+
+
+#################SAGE
+n, e1, e2 = 49569253, 1121, 1717
+a = xgcd (e1,e2) #Igualdad de euclides: 1121*798-1717*521 = 1
+print a
+mensaje1 = 16187450
+mensaje2 = 2897699
+(mensaje1**798)*(mensaje2)**(-521) % n
+#17 18 0 = RSA
+
+-------5--------
+----5.1---
+x = 14087332 mod 49569253
+x = 27425305 mod 45729283
+x = 62007067 mod 62615533
+raiz cubica 1331475586633548091 = 1100131
+
+----5.2---
+x = 1176293 mod 49569253
+x = 14483107 mod 45729283
+x = 35550694 mod 62615533
+raiz cubica 64998944742277873664 = 4020704
+
+----5.3--- 
+x = 46828916 mod 49569253
+x = 13942406 mod 45729283
+x = 62611116 mod 62615533
+raiz cubica 73050358288627000 = 418030
+
+----5.4---
+x = 15244478 mod 49569253
+x = 44901956 mod 45729283
+x = 4185043 mod 62615533
+raiz cubica 69498414788478126632 = 4111418 
+
+----5.5---
+x = 34299711 mod 49569253
+x = 24874564 mod 45729283
+x = 52598842 mod 62615533
+raiz cubica 216206345672767871 = 600191
+
+----5.6---
+x = 48939817 mod 49569253
+x = 7906872 mod 45729283
+x = 59059670 mod 62615533
+raiz cubica 73151164942912005048 = 4182222
+
+11 00 13 14 02 07 04 4 18 03 04 11 14 18 6 00 19 14 18 22 22
+L  A   N  O  C  H  E E  S D  E   L O  S  G  A  T  O  S W   W

@@ -1,0 +1,997 @@
+
+
+{{{id=1|
+# Aritmética entera: primos y factorización
+///
+}}}
+
+{{{id=2|
+a = 9998743; a.is_prime()         # sabemos que 9998743 es primo
+///
+True
+}}}
+
+{{{id=3|
+81.is_prime_power()               # sabemos que 81 = 3^4
+///
+True
+}}}
+
+{{{id=4|
+100.is_prime_power()              # sin embargo 100 = 2^2*5^2
+///
+False
+}}}
+
+{{{id=8|
+9.next_prime()
+///
+11
+}}}
+
+{{{id=9|
+next_prime(9)
+///
+11
+}}}
+
+{{{id=103|
+next_prime(-100)
+///
+2
+}}}
+
+{{{id=10|
+previous_prime(16)
+///
+13
+}}}
+
+{{{id=105|
+nth_prime(3) # muestra el n-ésimo primo, el primero es 2 y el tercero es 5
+///
+5
+}}}
+
+{{{id=11|
+next_prime_power(14)
+///
+16
+}}}
+
+{{{id=12|
+previous_prime_power(90) # no olvidemos que 89 = 89^1 y 89 es primo.
+///
+89
+}}}
+
+{{{id=13|
+factor(360)
+///
+2^3 * 3^2 * 5
+}}}
+
+{{{id=14|
+a = 360; a.factor() # se pide factorizar 360
+///
+2^3 * 3^2 * 5
+}}}
+
+{{{id=15|
+360 == 2^3 * 3^2 * 5   # ésta es la comprobación de lo anterior
+///
+True
+}}}
+
+{{{id=16|
+divisors(180); 180.divisors()  # las dos formas de calcular los divisores de 180
+///
+[1, 2, 3, 4, 5, 6, 9, 10, 12, 15, 18, 20, 30, 36, 45, 60, 90, 180]
+[1, 2, 3, 4, 5, 6, 9, 10, 12, 15, 18, 20, 30, 36, 45, 60, 90, 180]
+}}}
+
+{{{id=47|
+divisors(28),sum(divisors(28)), 2*28
+///
+([1, 2, 4, 7, 14, 28], 56, 56)
+}}}
+
+{{{id=48|
+time eratosthenes(30)
+///
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+Time: CPU 0.00 s, Wall: 0.00 s
+}}}
+
+{{{id=19|
+# División Entera
+///
+}}}
+
+{{{id=20|
+"""
+Dado un número entero a y un número entero no nulo b, podemos encontrar dos números enteros, q y r, únicos cumpliendo las siguientes propiedades:
+    a = b * q + r
+    0 <= r < |b|
+Sage tiene implementada la búsqueda de estos enteros q y r.
+"""
+///
+}}}
+
+{{{id=21|
+qr = 23 // 5, 23 % 5   # así se obtiene una pareja con cociente y resto de 23 y 5
+print qr
+///
+(4, 3)
+}}}
+
+{{{id=22|
+4*5+3 # comprobación
+///
+23
+}}}
+
+{{{id=23|
+qr = -26 // 5, -26 % 5
+print qr
+///
+(-6, 4)
+}}}
+
+{{{id=24|
+-6 * 5 + 4
+///
+-26
+}}}
+
+{{{id=25|
+qr = 26 // -5, 26 % -5  # aquí no obtiene 0 <= r
+print qr
+///
+(-6, -4)
+}}}
+
+{{{id=27|
+(-5) * (-6) + (-4); (-5) * (-6) -5 + 5 -4; (-5) * (-6 +1) +1
+///
+26
+26
+26
+}}}
+
+{{{id=26|
+qr = -26 // -5, -26 % -5  # aquí no obtiene 0 <= r
+print qr
+///
+(5, -1)
+}}}
+
+{{{id=28|
+5 * (-5) + (-1); 5 * (-5) -5 + 5 - 1; 6 * (-5) + 4
+///
+-26
+-26
+-26
+}}}
+
+{{{id=29|
+-26.mod(5); (-26).mod(5)
+///
+-1
+4
+}}}
+
+{{{id=30|
+-1+5
+///
+4
+}}}
+
+{{{id=31|
+2^(2^5) + 1   # el quinto número de Fermat es 4294967297 ... y pensaba que era primo
+///
+4294967297
+}}}
+
+{{{id=32|
+4294967297 % 641  # por tanto no es primo, como demostró Euler
+///
+0
+}}}
+
+{{{id=33|
+# Máximo común divisor y mínimo común múltiplo
+///
+}}}
+
+{{{id=34|
+78.gcd(24)
+///
+6
+}}}
+
+{{{id=35|
+78.lcm(24)
+///
+312
+}}}
+
+{{{id=36|
+78 * 24; 6 * 312 # lcm(m,n) = m * n / gcd(m,n)
+///
+1872
+1872
+}}}
+
+{{{id=37|
+312 == (78 * 24) // 6
+///
+True
+}}}
+
+{{{id=38|
+xgcd(78,24)   # máximo común divisor extendido; da los coeficientes de Bezout
+///
+(6, 1, -3)
+}}}
+
+{{{id=40|
+78 * 1 + 24 * (-3)
+///
+6
+}}}
+
+{{{id=43|
+d, u, v = xgcd(78,24)
+print d, u, v
+///
+6 1 -3
+}}}
+
+{{{id=44|
+inverse_mod(3,5)
+///
+2
+}}}
+
+{{{id=45|
+(3 * 2) % 5
+///
+1
+}}}
+
+{{{id=41|
+# Aritmética modular
+///
+}}}
+
+{{{id=51|
+def letraDelDNI(n):             # esta función calcula la letra del DNI español
+    letras = "TRWAGMYFPDXBNJZSQVHLCKE"
+    return letras[n % 23]
+///
+}}}
+
+{{{id=52|
+letraDelDNI(24211557)
+///
+'D'
+}}}
+
+{{{id=53|
+R = IntegerModRing(23)
+///
+}}}
+
+{{{id=54|
+R
+///
+Ring of integers modulo 23
+}}}
+
+{{{id=55|
+a = R(12) # Así se crean los elementos del anillo
+///
+}}}
+
+{{{id=56|
+type(a)
+///
+<type 'sage.rings.finite_rings.integer_mod.IntegerMod_int'>
+}}}
+
+{{{id=57|
+parent(a)
+///
+Ring of integers modulo 23
+}}}
+
+{{{id=58|
+a.base_ring()
+///
+Ring of integers modulo 23
+}}}
+
+{{{id=61|
+b = R(14)
+///
+}}}
+
+{{{id=59|
+a + b, a - b, a * b, b^-1, a / b
+///
+(3, 21, 7, 5, 14)
+}}}
+
+{{{id=60|
+(12 + 14) % 23, (12 - 14) % 23, 12*14 % 23, 14*5 % 23, 12*5 % 23
+///
+(3, 21, 7, 1, 14)
+}}}
+
+{{{id=63|
+a^(-1) # el inverso de a, que existe en este caso
+///
+2
+}}}
+
+{{{id=64|
+a * R(2)
+///
+1
+}}}
+
+{{{id=65|
+a^2345
+///
+6
+}}}
+
+{{{id=66|
+"""
+Si el anillo no tiene módulo primo, existen elementos invertibles (los primos con el módulo) y
+también elementos que no tienen inverso. Para averiguarlo tenemos el método is.unit()
+"""
+///
+}}}
+
+{{{id=67|
+R = IntegerModRing(88)
+///
+}}}
+
+{{{id=68|
+a = R(4)
+///
+}}}
+
+{{{id=69|
+a.is_unit()
+///
+False
+}}}
+
+{{{id=70|
+R(5).is_unit()
+///
+True
+}}}
+
+{{{id=73|
+"""
+Algunos elementos del anillo son el cuadrado de otro u otros. A saberlo nos ayuda el método
+is.square()
+"""
+///
+}}}
+
+{{{id=71|
+a.is_square()
+///
+True
+}}}
+
+{{{id=72|
+a.sqrt()        # Una raíz cuadrada
+///
+2
+}}}
+
+{{{id=75|
+a.sqrt(all = True) # Todas las raíces cuadradas
+///
+[2, 42, 46, 86]
+}}}
+
+{{{id=76|
+R(2)^2, R(42)^2, R(46)^2, R(86)^2
+///
+(4, 4, 4, 4)
+}}}
+
+{{{id=77|
+R = IntegerModRing(97)
+///
+}}}
+
+{{{id=78|
+a = R(2) / R(3)
+print a
+///
+33
+}}}
+
+{{{id=79|
+a.rational_reconstruction()
+///
+2/3
+}}}
+
+{{{id=80|
+b = R(47)
+///
+}}}
+
+{{{id=81|
+b^20052005
+///
+50
+}}}
+
+{{{id=82|
+b.modulus()
+///
+97
+}}}
+
+{{{id=83|
+# Más sobre el máximo común divisor y el mínimo común múltiplo
+///
+}}}
+
+{{{id=84|
+gcd(6,10,14)  # no calcula el máximo común divisor de más de dos
+///
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "_sage_input_4.py", line 10, in <module>
+    exec compile(u'open("___code___.py","w").write("# -*- coding: utf-8 -*-\\n" + _support_.preparse_worksheet_cell(base64.b64decode("Z2NkKDYsMTAsMTQp"),globals())+"\\n"); execfile(os.path.abspath("___code___.py"))' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/tmp/tmp2QHJ20/___code___.py", line 3, in <module>
+    exec compile(u'gcd(_sage_const_6 ,_sage_const_10 ,_sage_const_14 )' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+TypeError: gcd() takes at most 2 arguments (3 given)
+}}}
+
+{{{id=85|
+gcd([6,10,14]) # pero si el argumento es una lista, funciona.
+///
+2
+}}}
+
+{{{id=86|
+gcd([]) # sin comentarios
+///
+0
+}}}
+
+{{{id=87|
+LCM?
+///
+<html><!--notruncate-->
+
+<div class="docstring">
+    
+  <p><strong>File:</strong> /opt/sage-5.2-linux-64bit-ubuntu_12.04_lts-x86_64-Linux/local/lib/python2.7/site-packages/sage/rings/arith.py</p>
+<p><strong>Type:</strong> &lt;type &#8216;function&#8217;&gt;</p>
+<p><strong>Definition:</strong> LCM(a, b=None)</p>
+<p><strong>Docstring:</strong></p>
+<blockquote>
+<div><p>The least common multiple of a and b, or if a is a list and b is
+omitted the least common multiple of all elements of a.</p>
+<p>Note that LCM is an alias for lcm.</p>
+<p>INPUT:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">a,b</span></tt> - two elements of a ring with lcm or</li>
+<li><tt class="docutils literal"><span class="pre">a</span></tt> - a list or tuple of elements of a ring with
+lcm</li>
+</ul>
+<p>OUTPUT:</p>
+<p>First, the given elements are coerced into a common parent. Then,
+their least common multiple <em>in that parent</em> is returned.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">lcm</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">9700</span>
+<span class="gp">sage: </span><span class="n">LCM</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">9700</span>
+<span class="gp">sage: </span><span class="n">LCM</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">sage: </span><span class="n">LCM</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">15</span>
+<span class="gp">sage: </span><span class="n">LCM</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="go">60</span>
+<span class="gp">sage: </span><span class="n">v</span> <span class="o">=</span> <span class="n">LCM</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10000</span><span class="p">))</span>   <span class="c"># *very* fast!</span>
+<span class="gp">sage: </span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+<span class="go">4349</span>
+</pre></div>
+</div>
+<p>TESTS:</p>
+<p>The following tests against a bug that was fixed in trac
+ticket #10771:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">lcm</span><span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>The following shows that indeed coercion takes place before
+computing the least common multiple:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">R</span><span class="o">.&lt;</span><span class="n">x</span><span class="o">&gt;=</span><span class="n">QQ</span><span class="p">[]</span>
+<span class="gp">sage: </span><span class="n">S</span><span class="o">.&lt;</span><span class="n">x</span><span class="o">&gt;=</span><span class="n">ZZ</span><span class="p">[]</span>
+<span class="gp">sage: </span><span class="n">p</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">random_element</span><span class="p">()</span>
+<span class="gp">sage: </span><span class="n">q</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">random_element</span><span class="p">()</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">lcm</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">]))</span>
+<span class="go">Fraction Field of Univariate Polynomial Ring in x over Rational Field</span>
+</pre></div>
+</div>
+<p>Make sure we try QQ and not merely ZZ (<a class="reference external" href="http://trac.sagemath.org/13014">trac ticket #13014</a>):</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="nb">bool</span><span class="p">(</span><span class="n">lcm</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span> <span class="o">==</span> <span class="n">lcm</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">SR</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">7</span><span class="p">)))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Make sure that the lcm of Expressions stays symbolic:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">lcm</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">Integer Ring</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">lcm</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">Symbolic Ring</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">lcm</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">SR</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="go">Symbolic Ring</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">lcm</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">SR</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="go">Symbolic Ring</span>
+</pre></div>
+</div>
+<p>Verify that objects without lcm methods but which can&#8217;t be
+coerced to ZZ or QQ raise an error:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">F</span><span class="o">.&lt;</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">FreeMonoid</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">sage: </span><span class="n">lcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="nc">TypeError</span>: <span class="n-Identifier">unable to find lcm</span>
+</pre></div>
+</div>
+</div></blockquote>
+
+
+</div>
+</html>
+}}}
+
+{{{id=88|
+lcm?
+///
+<html><!--notruncate-->
+
+<div class="docstring">
+    
+  <p><strong>File:</strong> /opt/sage-5.2-linux-64bit-ubuntu_12.04_lts-x86_64-Linux/local/lib/python2.7/site-packages/sage/rings/arith.py</p>
+<p><strong>Type:</strong> &lt;type &#8216;function&#8217;&gt;</p>
+<p><strong>Definition:</strong> lcm(a, b=None)</p>
+<p><strong>Docstring:</strong></p>
+<blockquote>
+<div><p>The least common multiple of a and b, or if a is a list and b is
+omitted the least common multiple of all elements of a.</p>
+<p>Note that LCM is an alias for lcm.</p>
+<p>INPUT:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">a,b</span></tt> - two elements of a ring with lcm or</li>
+<li><tt class="docutils literal"><span class="pre">a</span></tt> - a list or tuple of elements of a ring with
+lcm</li>
+</ul>
+<p>OUTPUT:</p>
+<p>First, the given elements are coerced into a common parent. Then,
+their least common multiple <em>in that parent</em> is returned.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">lcm</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">9700</span>
+<span class="gp">sage: </span><span class="n">LCM</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">9700</span>
+<span class="gp">sage: </span><span class="n">LCM</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">sage: </span><span class="n">LCM</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">15</span>
+<span class="gp">sage: </span><span class="n">LCM</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="go">60</span>
+<span class="gp">sage: </span><span class="n">v</span> <span class="o">=</span> <span class="n">LCM</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10000</span><span class="p">))</span>   <span class="c"># *very* fast!</span>
+<span class="gp">sage: </span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+<span class="go">4349</span>
+</pre></div>
+</div>
+<p>TESTS:</p>
+<p>The following tests against a bug that was fixed in trac
+ticket #10771:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">lcm</span><span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>The following shows that indeed coercion takes place before
+computing the least common multiple:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">R</span><span class="o">.&lt;</span><span class="n">x</span><span class="o">&gt;=</span><span class="n">QQ</span><span class="p">[]</span>
+<span class="gp">sage: </span><span class="n">S</span><span class="o">.&lt;</span><span class="n">x</span><span class="o">&gt;=</span><span class="n">ZZ</span><span class="p">[]</span>
+<span class="gp">sage: </span><span class="n">p</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">random_element</span><span class="p">()</span>
+<span class="gp">sage: </span><span class="n">q</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">random_element</span><span class="p">()</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">lcm</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">]))</span>
+<span class="go">Fraction Field of Univariate Polynomial Ring in x over Rational Field</span>
+</pre></div>
+</div>
+<p>Make sure we try QQ and not merely ZZ (<a class="reference external" href="http://trac.sagemath.org/13014">trac ticket #13014</a>):</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="nb">bool</span><span class="p">(</span><span class="n">lcm</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span> <span class="o">==</span> <span class="n">lcm</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">SR</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">7</span><span class="p">)))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Make sure that the lcm of Expressions stays symbolic:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">lcm</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">Integer Ring</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">lcm</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">Symbolic Ring</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">lcm</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">SR</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="go">Symbolic Ring</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">lcm</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">SR</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="go">Symbolic Ring</span>
+</pre></div>
+</div>
+<p>Verify that objects without lcm methods but which can&#8217;t be
+coerced to ZZ or QQ raise an error:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">F</span><span class="o">.&lt;</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">FreeMonoid</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">sage: </span><span class="n">lcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="nc">TypeError</span>: <span class="n-Identifier">unable to find lcm</span>
+</pre></div>
+</div>
+</div></blockquote>
+
+
+</div>
+</html>
+}}}
+
+{{{id=89|
+lcm(97,100)
+///
+9700
+}}}
+
+{{{id=92|
+LCM(97,100)
+///
+9700
+}}}
+
+{{{id=93|
+lcm(0,2)
+///
+0
+}}}
+
+{{{id=94|
+lcm(-3,-5)
+///
+15
+}}}
+
+{{{id=95|
+lcm([1,2,3,4,5])
+///
+60
+}}}
+
+{{{id=99|
+lcm([1,2,3,4,5])
+///
+60
+}}}
+
+{{{id=96|
+xlcm(12,20)  # l = [m,n]  y m1 y m2 tales que l = m1*m2, m1|m y m2|n y (m1,m2)=1 todos sin factorización
+///
+(60, 12, 5)
+}}}
+
+{{{id=98|
+str?
+///
+<html><!--notruncate-->
+<div class="docstring"><p><strong>Type:</strong> &lt;type 'type'&gt;</p>
+<p><strong>Definition:</strong> str( [noargspec] )</p>
+<p><strong>Docstring:</strong></p>
+<pre>
+
+str(object) -> string
+
+Return a nice string representation of the object.
+If the argument is a string, the return value is the same object.</pre></div>
+</html>
+}}}
+
+{{{id=102|
+valuation?
+///
+<html><!--notruncate-->
+
+<div class="docstring">
+    
+  <p><strong>File:</strong> /opt/sage-5.2-linux-64bit-ubuntu_12.04_lts-x86_64-Linux/local/lib/python2.7/site-packages/sage/rings/arith.py</p>
+<p><strong>Type:</strong> &lt;type &#8216;function&#8217;&gt;</p>
+<p><strong>Definition:</strong> valuation(m, *args1, **args2)</p>
+<p><strong>Docstring:</strong></p>
+<blockquote>
+<div><p>This actually just calls the m.valuation() method.
+See the documentation of m.valuation() for a more precise description.
+Use of this function by developers is discouraged. Use m.valuation() instead.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is not always a valuation in the mathematical sense.
+For more information see:
+sage.rings.finite_rings.integer_mod.IntegerMod_int.valuation</p>
+</div>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">9</span>
+<span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="go">-2</span>
+</pre></div>
+</div>
+<p>Valuation of 0 is defined, but valuation with respect to 0 is not:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="go">+Infinity</span>
+<span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="nc">ValueError</span>: <span class="n-Identifier">You can only compute the valuation with respect to a integer larger than 1.</span>
+</pre></div>
+</div>
+<p>Here are some other examples:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">243</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">5</span>
+<span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">243</span><span class="o">*</span><span class="mi">10007</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">5</span>
+<span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">243</span><span class="o">*</span><span class="mi">10007</span><span class="p">,</span><span class="mi">10007</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">sage: </span><span class="n">y</span> <span class="o">=</span> <span class="n">QQ</span><span class="p">[</span><span class="s">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">gen</span><span class="p">()</span>
+<span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="n">y</span><span class="o">^</span><span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">3</span>
+<span class="gp">sage: </span><span class="n">x</span> <span class="o">=</span> <span class="n">QQ</span><span class="p">[[</span><span class="s">&#39;x&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">gen</span><span class="p">()</span>
+<span class="gp">sage: </span><span class="n">valuation</span><span class="p">((</span><span class="n">x</span><span class="o">^</span><span class="mi">3</span><span class="o">-</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">4</span><span class="p">))</span>
+<span class="go">2</span>
+<span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">4</span><span class="n">r</span><span class="p">,</span><span class="mi">2</span><span class="n">r</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">sage: </span><span class="n">valuation</span><span class="p">(</span><span class="mi">1</span><span class="n">r</span><span class="p">,</span><span class="mi">1</span><span class="n">r</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="nc">ValueError</span>: <span class="n-Identifier">You can only compute the valuation with respect to a integer larger than 1.</span>
+</pre></div>
+</div>
+</div></blockquote>
+
+
+</div>
+</html>
+}}}
+
+{{{id=110|
+# Miscelanea y programas
+///
+}}}
+
+{{{id=107|
+squarefree_part(12); squarefree_part(135); factor(135)
+///
+3
+15
+3^3 * 5
+}}}
+
+{{{id=109|
+9.str(2) # m.str(2) expresa m en base 2 pero como string
+///
+'1001'
+}}}
+
+{{{id=112|
+3215.str(10)
+///
+'3215'
+}}}
+
+{{{id=113|
+def digitosChar(n):  # n es un número en base 10, el resultado es una lista de caracteres
+    s = n.str(10)
+    r = []
+    for i in range(len(s)):
+        r.append(s[i])
+    return r
+///
+}}}
+
+{{{id=114|
+digitosChar(1234)
+///
+['1', '2', '3', '4']
+}}}
+
+{{{id=115|
+def digitosNum(n):             # n es un número en base 10
+    signo = sign(n)
+    m = int(n) * signo
+    s = []
+    while m > 9:
+        s.insert(0,m % 10)
+        m = m // 10
+    s.insert(0,m)
+    return signo, s
+///
+}}}
+
+{{{id=116|
+digitosNum(-1234)
+///
+(-1, [1, 2, 3, 4])
+}}}
+
+{{{id=117|
+digitosChar(-1234)
+///
+['-', '1', '2', '3', '4']
+}}}
+
+{{{id=119|
+int(1234.str(2)) # pero no es un número en base 2 sino en base 10 con dígitos 0 y 1
+///
+10011010010
+}}}
+
+{{{id=118|
+def aBaseDos(n):
+    """
+    lista los dígitos en base dos de un número en base 10
+    el menos significativo es el más a la derecha
+    la salida es un par, con signo de primera y dígitos de segunda
+    """
+    signo = sign(n)
+    n = int(n) * signo
+    s = []
+    while n > 1:
+        s.insert(0,n % 2)
+        n = n // 2
+    s.insert(0,n)
+    return signo, s
+///
+}}}
+
+{{{id=132|
+aBaseDos(36)
+///
+(1, [1, 0, 0, 1, 0, 0])
+}}}
+
+{{{id=120|
+par = aBaseDos(-8)
+print par
+///
+(-1, [1, 0, 0, 0])
+}}}
+
+{{{id=121|
+aBaseDos(315)
+///
+(1, [1, 0, 0, 1, 1, 1, 0, 1, 1])
+}}}
+
+{{{id=151|
+# Ejer: aumentar en eficiencia la función deBaseDosADiez que viene más abajo.
+///
+}}}
+
+{{{id=131|
+def deBaseDosADiez(signoLista):  # es una versión ineficiente
+    """
+    dado un par formado por un signo y una lista de dígitos en binario
+    responde con el número correspondiente en base 10 afectado de su signo
+    """
+    l, s = signoLista[1], sign(signoLista[0])  
+    m = len(l)
+    if m:
+        m = m - 1
+        for i in range(m):
+           if l[i]:
+               l[i] = 2^(m-i)
+        respuesta = s * sum(l)
+    else:
+        respuesta = "error: segunda componente debe ser no vacía"
+    return respuesta
+///
+}}}
+
+{{{id=128|
+deBaseDosADiez((1, [1, 0, 0, 1, 1, 1, 0, 1, 1]))
+///
+315
+}}}
+
+{{{id=129|
+deBaseDosADiez((-5, [1,1,0,0,1,0,0,0,1,1,1,1]))
+///
+-3215
+}}}
+
+{{{id=134|
+deBaseDosADiez((-5, []))
+///
+'error: segunda componente debe ser no vac\xc3\xada'
+}}}
+
+{{{id=143|
+def solCong(a,b,m):
+    """
+    a y b son enteros, pero m debe ser un positivo mayor que 1.
+    "solCongruencia" da la solución a la congruencia, si existe, y 
+    una advertencia en caso contrario
+    """
+    a, b, m = int(a), int(b), int(m) * sign(m)
+    x=xgcd(m,a)
+    if b % x[0]:
+        return 'No tiene solución'
+       #return [0,0]
+    else:
+        m = m // x[0]
+        b = b // x[0]
+        return [b*x[2] % m,m]
+///
+}}}
+
+{{{id=144|
+solCong(48,12,14)
+///
+[2, 7]
+}}}
+
+{{{id=145|
+solCong(1,10,3)
+///
+[1, 3]
+}}}
+
+{{{id=146|
+solCong(15,10,20)
+///
+[2, 4]
+}}}
+
+{{{id=147|
+solCong(3,24,5)
+///
+[3, 5]
+}}}
+
+{{{id=148|
+solCong(16,1,21)
+///
+[4, 21]
+}}}
+
+{{{id=149|
+solCong(7,1,21)
+///
+'No tiene soluci\xc3\xb3n'
+}}}
+
+{{{id=150|
+
+///
+}}}

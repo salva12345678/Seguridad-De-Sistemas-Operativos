@@ -1,0 +1,715 @@
+
+
+{{{id=1|
+# Formas de definir el anillo de polinomios
+///
+}}}
+
+{{{id=2|
+A.<x>=QQ[]; A
+///
+Univariate Polynomial Ring in x over Rational Field
+}}}
+
+{{{id=3|
+Z.<y>=GF(11)[]; Z
+///
+Univariate Polynomial Ring in y over Finite Field of size 11
+}}}
+
+{{{id=125|
+h = Z(12*y + 24); h
+///
+y + 2
+}}}
+
+{{{id=4|
+Z.modulus()
+///
+11
+}}}
+
+{{{id=123|
+A.modulus()
+///
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "_sage_input_7.py", line 10, in <module>
+    exec compile(u'open("___code___.py","w").write("# -*- coding: utf-8 -*-\\n" + _support_.preparse_worksheet_cell(base64.b64decode("QS5tb2R1bHVzKCk="),globals())+"\\n"); execfile(os.path.abspath("___code___.py"))' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/tmp/tmpx8JsOX/___code___.py", line 2, in <module>
+    exec compile(u'A.modulus()' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "parent.pyx", line 624, in sage.structure.parent.Parent.__getattr__ (sage/structure/parent.c:6020)
+  File "misc.pyx", line 200, in sage.structure.misc.getattr_from_other_class (sage/structure/misc.c:1427)
+AttributeError: 'PolynomialRing_field_with_category' object has no attribute 'modulus'
+}}}
+
+{{{id=5|
+R = PolynomialRing(QQ, 'x')
+///
+}}}
+
+{{{id=6|
+R == A
+///
+True
+}}}
+
+{{{id=7|
+S = QQ['x']
+///
+}}}
+
+{{{id=8|
+S == R
+///
+True
+}}}
+
+{{{id=9|
+R.<x> = PolynomialRing(QQ)
+///
+}}}
+
+{{{id=10|
+S == R
+///
+True
+}}}
+
+{{{id=11|
+# Los primeros pasos
+///
+}}}
+
+{{{id=12|
+A.<x>=QQ[]
+///
+}}}
+
+{{{id=13|
+f = 3*x^4 + 5*x^3 + 3*x + 2
+///
+}}}
+
+{{{id=14|
+type(f)
+///
+<type 'sage.rings.polynomial.polynomial_rational_flint.Polynomial_rational_flint'>
+}}}
+
+{{{id=15|
+f(0), f(1), f(-5)
+///
+(2, 13, 1237)
+}}}
+
+{{{id=16|
+g = x^2 - 4*x + 1
+///
+}}}
+
+{{{id=17|
+f + g
+///
+3*x^4 + 5*x^3 + x^2 - x + 3
+}}}
+
+{{{id=18|
+f-g
+///
+3*x^4 + 5*x^3 - x^2 + 7*x + 1
+}}}
+
+{{{id=19|
+f * g
+///
+3*x^6 - 7*x^5 - 17*x^4 + 8*x^3 - 10*x^2 - 5*x + 2
+}}}
+
+{{{id=20|
+g^2
+///
+x^4 - 8*x^3 + 18*x^2 - 8*x + 1
+}}}
+
+{{{id=21|
+f // g
+///
+3*x^2 + 17*x + 65
+}}}
+
+{{{id=22|
+f % g
+///
+246*x - 63
+}}}
+
+{{{id=23|
+f.base_ring()
+///
+Rational Field
+}}}
+
+{{{id=24|
+f.parent()
+///
+Univariate Polynomial Ring in x over Rational Field
+}}}
+
+{{{id=25|
+# Factorización
+///
+}}}
+
+{{{id=27|
+p = (x-1)^2 * (x-6)^2 * (x^2 + 1)
+///
+}}}
+
+{{{id=28|
+q = (x-1)^3 * (x-6) * (3*x - 10)
+///
+}}}
+
+{{{id=29|
+p; q
+///
+x^6 - 14*x^5 + 62*x^4 - 98*x^3 + 97*x^2 - 84*x + 36
+3*x^5 - 37*x^4 + 153*x^3 - 267*x^2 + 208*x - 60
+}}}
+
+{{{id=30|
+p.factor()
+///
+(x - 6)^2 * (x - 1)^2 * (x^2 + 1)
+}}}
+
+{{{id=31|
+factor(q)
+///
+(3) * (x - 6) * (x - 10/3) * (x - 1)^3
+}}}
+
+{{{id=32|
+expand(_)
+///
+3*x^5 - 37*x^4 + 153*x^3 - 267*x^2 + 208*x - 60
+}}}
+
+{{{id=33|
+gcd(p,q)
+///
+x^3 - 8*x^2 + 13*x - 6
+}}}
+
+{{{id=35|
+_.factor()
+///
+(x - 6) * (x - 1)^2
+}}}
+
+{{{id=36|
+r=lcm(p,q); r
+///
+x^8 - 55/3*x^7 + 126*x^6 - 1240/3*x^5 + 2185/3*x^4 - 831*x^3 + 2170/3*x^2 - 436*x + 120
+}}}
+
+{{{id=37|
+factor(r)
+///
+(x - 10/3) * (x - 6)^2 * (x - 1)^3 * (x^2 + 1)
+}}}
+
+{{{id=38|
+(x^2-2).is_irreducible()
+///
+True
+}}}
+
+{{{id=127|
+S.<x> = GF(2)[]
+///
+}}}
+
+{{{id=129|
+u = S(x^2+1); factor(u)
+///
+(x + 1)^2
+}}}
+
+{{{id=39|
+"""
+En Q[x] x^2-2 es irreducible; sin embargo sobre R, es decir en R[x], es claro que no
+pues tiene raíces sqrt(2) y -sqrt(2).
+"""
+///
+}}}
+
+{{{id=40|
+R.<x> = RR[]
+///
+}}}
+
+{{{id=41|
+(x^2-2).is_irreducible()
+///
+False
+}}}
+
+{{{id=42|
+# Raíces
+///
+}}}
+
+{{{id=131|
+u = S(x^2+1)
+///
+}}}
+
+{{{id=134|
+u.roots()
+///
+[(1, 2)]
+}}}
+
+{{{id=43|
+R.<x> = QQ[]
+///
+}}}
+
+{{{id=44|
+f = (x^2 + 1) * (x - 3)^2 * (x^2 - 2) * (5*x -13)
+///
+}}}
+
+{{{id=50|
+expand(f)
+///
+5*x^7 - 43*x^6 + 118*x^5 - 74*x^4 - 133*x^3 + 203*x^2 - 246*x + 234
+}}}
+
+{{{id=47|
+# f tiene la raíz 13/5 simple y la raíz 3 doble; no tiene más raíces en Q[x].
+///
+}}}
+
+{{{id=45|
+f.roots()
+///
+[(13/5, 1), (3, 2)]
+}}}
+
+{{{id=46|
+f.real_roots()
+///
+[-1.41421356237310, 1.41421356237310, 2.59999999999996]
+}}}
+
+{{{id=49|
+f.complex_roots()
+///
+[-1.41421356237310, 1.41421356237310, 2.59999999999996, -9.00387057771604e-18 - 1.00000000000000*I, -9.00387057771604e-18 + 1.00000000000000*I, 3.00000000000002 - 1.35872818718910e-7*I, 3.00000000000002 + 1.35872818718910e-7*I]
+}}}
+
+{{{id=52|
+# Fracciones racionales
+///
+}}}
+
+{{{id=53|
+r = (x^3 - 4)/(3*x^2 - 5*x + 1); s = (6*x^2 - 4*x)/(2*x-5)
+///
+}}}
+
+{{{id=54|
+r + s
+///
+(20*x^4 - 47*x^3 + 26*x^2 - 12*x + 20)/(6*x^3 - 25*x^2 + 27*x - 5)
+}}}
+
+{{{id=55|
+s^3
+///
+(216*x^6 - 432*x^5 + 288*x^4 - 64*x^3)/(8*x^3 - 60*x^2 + 150*x - 125)
+}}}
+
+{{{id=56|
+r(4), r(-2), r(100)
+///
+(60/29, -12/23, 999996/29501)
+}}}
+
+{{{id=57|
+r.denominator()
+///
+3*x^2 - 5*x + 1
+}}}
+
+{{{id=58|
+r.numerator()
+///
+x^3 - 4
+}}}
+
+{{{id=59|
+type(r)
+///
+<class 'sage.rings.fraction_field_element.FractionFieldElement_1poly_field'>
+}}}
+
+{{{id=60|
+r.base_ring()
+///
+Rational Field
+}}}
+
+{{{id=61|
+r.parent()
+///
+Fraction Field of Univariate Polynomial Ring in x over Rational Field
+}}}
+
+{{{id=62|
+# Miscelanea
+///
+}}}
+
+{{{id=63|
+f = x^4 + 3*x^3 - 2*x^2 + 9
+///
+}}}
+
+{{{id=64|
+g = 0
+///
+}}}
+
+{{{id=65|
+f.degree()
+///
+4
+}}}
+
+{{{id=66|
+g.degree()
+///
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "_sage_input_79.py", line 10, in <module>
+    exec compile(u'open("___code___.py","w").write("# -*- coding: utf-8 -*-\\n" + _support_.preparse_worksheet_cell(base64.b64decode("Zy5kZWdyZWUoKQ=="),globals())+"\\n"); execfile(os.path.abspath("___code___.py"))' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/tmp/tmpEBN17G/___code___.py", line 2, in <module>
+    exec compile(u'g.degree()' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "element.pyx", line 2828, in sage.structure.element.EuclideanDomainElement.degree (sage/structure/element.c:20038)
+NotImplementedError
+}}}
+
+{{{id=67|
+f.coeffs()
+///
+[9, 0, -2, 3, 1]
+}}}
+
+{{{id=68|
+f.derivative()
+///
+4*x^3 + 9*x^2 - 4*x
+}}}
+
+{{{id=69|
+f.integral()
+///
+1/5*x^5 + 3/4*x^4 - 2/3*x^3 + 9*x
+}}}
+
+{{{id=71|
+f.plot() # Por defecto lo dibuja en el intervalo (-1,1) y en color azul
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=72|
+f.plot(-3,2, color = 'red')   # así modificamos el intervalo y el color
+///
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+}}}
+
+{{{id=73|
+# Cuerpos finitos
+///
+}}}
+
+{{{id=74|
+K = GF(9, 'a')
+///
+}}}
+
+{{{id=75|
+for i,x in enumerate(K): [i,x]
+///
+[0, 0]
+[1, 2*a]
+[2, a + 1]
+[3, a + 2]
+[4, 2]
+[5, a]
+[6, 2*a + 2]
+[7, 2*a + 1]
+[8, 1]
+}}}
+
+{{{id=76|
+for x in GF(5): print x
+///
+0
+1
+2
+3
+4
+}}}
+
+{{{id=77|
+K = GF(3^40,'b'); type(K)
+///
+<class 'sage.rings.finite_rings.finite_field_ext_pari.FiniteField_ext_pari_with_category'>
+}}}
+
+{{{id=78|
+K.base_ring()
+///
+Finite Field of size 3
+}}}
+
+{{{id=79|
+GF(next_prime(10^20)).is_field()
+///
+True
+}}}
+
+{{{id=80|
+for i,x in enumerate(GF(next_prime(10))): i,x
+///
+(0, 0)
+(1, 1)
+(2, 2)
+(3, 3)
+(4, 4)
+(5, 5)
+(6, 6)
+(7, 7)
+(8, 8)
+(9, 9)
+(10, 10)
+}}}
+
+{{{id=83|
+for i,x in enumerate(GF(8)): i,x
+///
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "_sage_input_17.py", line 10, in <module>
+    exec compile(u'open("___code___.py","w").write("# -*- coding: utf-8 -*-\\n" + _support_.preparse_worksheet_cell(base64.b64decode("Zm9yIGkseCBpbiBlbnVtZXJhdGUoR0YoOCkpOiBpLHg="),globals())+"\\n"); execfile(os.path.abspath("___code___.py"))' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/tmp/tmpyOP8Cg/___code___.py", line 3, in <module>
+    exec compile(u'for i,x in enumerate(GF(_sage_const_8 )): i,x' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "factory.pyx", line 143, in sage.structure.factory.UniqueFactory.__call__ (sage/structure/factory.c:1122)
+  File "factory.pyx", line 172, in sage.structure.factory.UniqueFactory.get_object (sage/structure/factory.c:1341)
+  File "/opt/sage-5.2-linux-64bit-ubuntu_12.04_lts-x86_64-Linux/local/lib/python2.7/site-packages/sage/rings/finite_rings/constructor.py", line 448, in create_object
+    raise TypeError("you must specify the generator name.")
+TypeError: you must specify the generator name.
+}}}
+
+{{{id=84|
+K.<a> = FiniteField(9); K    # es otra forma de definir el cuerpo finito
+///
+Finite Field in a of size 3^2
+}}}
+
+{{{id=85|
+parent(a)
+///
+Finite Field in a of size 3^2
+}}}
+
+{{{id=86|
+charpoly(a, 'y')
+///
+y^2 + 2*y + 2
+}}}
+
+{{{id=89|
+K.modulus()  # es posible conocer el polinomio con el que ha sido creado el cuerpo finito
+///
+x^2 + 2*x + 2
+}}}
+
+{{{id=87|
+GF(9, 'a').modulus()
+///
+x^2 + 2*x + 2
+}}}
+
+{{{id=100|
+# igualdad con diferentes definiciones
+///
+}}}
+
+{{{id=88|
+K = GF(7, 'a')
+///
+}}}
+
+{{{id=93|
+K = GF(7, 'a'); L = GF(7, 'b'); L == K
+///
+True
+}}}
+
+{{{id=97|
+K = GF(4,'a'); K.modulus()
+///
+x^2 + x + 1
+}}}
+
+{{{id=94|
+L = GF(4,'a', K.modulus())
+///
+}}}
+
+{{{id=95|
+L is K
+///
+True
+}}}
+
+{{{id=99|
+M = GF(4,'a', K.modulus().change_variable_name('y'))
+///
+}}}
+
+{{{id=102|
+M is L
+///
+True
+}}}
+
+{{{id=103|
+from sage.rings.finite_rings.constructor import is_PrimeFiniteField
+///
+}}}
+
+{{{id=104|
+is_PrimeFiniteField(QQ)
+///
+False
+}}}
+
+{{{id=105|
+is_PrimeFiniteField(GF(7))
+///
+True
+}}}
+
+{{{id=106|
+is_PrimeFiniteField(GF(7^2,'a'))
+///
+False
+}}}
+
+{{{id=107|
+is_PrimeFiniteField(GF(next_prime(10^90,proof=False)))
+///
+True
+}}}
+
+{{{id=110|
+# una rareza en la creación de cuerpos finitos que los hace distintos, siendo isormorfos:
+# elegir aleatoriamente el módulo
+///
+}}}
+
+{{{id=108|
+K = GF(5**10, 'a', modulus='random')
+///
+}}}
+
+{{{id=109|
+N = GF(5**10, 'a', modulus='random')
+///
+}}}
+
+{{{id=112|
+K is N
+///
+False
+}}}
+
+{{{id=113|
+GF(5**10, 'a') is GF(5**10, 'a')
+///
+True
+}}}
+
+{{{id=114|
+# Creación de una clase
+///
+}}}
+
+{{{id=115|
+K = FiniteFields(); K
+///
+Category of finite fields
+}}}
+
+{{{id=116|
+FiniteField(17) in K
+///
+True
+}}}
+
+{{{id=117|
+RationalField() in K
+///
+False
+}}}
+
+{{{id=118|
+K(RationalField())
+///
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "_sage_input_62.py", line 10, in <module>
+    exec compile(u'open("___code___.py","w").write("# -*- coding: utf-8 -*-\\n" + _support_.preparse_worksheet_cell(base64.b64decode("SyhSYXRpb25hbEZpZWxkKCkp"),globals())+"\\n"); execfile(os.path.abspath("___code___.py"))' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/tmp/tmpZixQSj/___code___.py", line 2, in <module>
+    exec compile(u'K(RationalField())' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/opt/sage-5.2-linux-64bit-ubuntu_12.04_lts-x86_64-Linux/local/lib/python2.7/site-packages/sage/categories/category.py", line 555, in __call__
+    return self._call_(x, *args, **opts)
+  File "/opt/sage-5.2-linux-64bit-ubuntu_12.04_lts-x86_64-Linux/local/lib/python2.7/site-packages/sage/categories/finite_fields.py", line 77, in _call_
+    raise TypeError, "unable to canonically associate a finite field to %s"%x
+TypeError: unable to canonically associate a finite field to Rational Field
+}}}
+
+{{{id=119|
+TestSuite(FiniteFields()).run()
+///
+}}}
+
+{{{id=122|
+FiniteFields().super_categories()
+///
+[Category of fields, Category of finite enumerated sets]
+}}}

@@ -1,0 +1,2163 @@
+alem_1415_leccion_00
+system:sage
+
+
+{{{id=128|
+# Apri la tua mente 1 + 1 = 10 ... 2 non è sempre
+///
+}}}
+
+{{{id=244|
+# Operaciones
+///
+}}}
+
+{{{id=245|
+45+33 #esto es un comentario
+///
+78
+}}}
+
+{{{id=246|
+48-120
+///
+-72
+}}}
+
+{{{id=247|
+120*35
+///
+4200
+}}}
+
+{{{id=248|
+125/5
+///
+25
+}}}
+
+{{{id=249|
+45/23 # Si la division no es exacta tenemos un numero racional
+///
+45/23
+}}}
+
+{{{id=250|
+190/24 # Si la fraccion es reducible, Sage la reduce
+///
+95/12
+}}}
+
+{{{id=251|
+2^34; 2**34               # Podemos escribir dos o mas operaciones separadas por punto y coma
+///
+17179869184
+17179869184
+}}}
+
+{{{id=252|
+"""
+ También se pueden separar por comas, y el resultado aparece
+ en forma de lista, esto es, entre paréntesis
+"""
+///
+}}}
+
+{{{id=253|
+2^34, 2**34
+///
+(17179869184, 17179869184)
+}}}
+
+{{{id=254|
+2^(-4)   # Las potencias de exponente negativo producen fracciones
+///
+1/16
+}}}
+
+{{{id=255|
+# Los parentesis y la jerarquia funcionan como se espera
+///
+}}}
+
+{{{id=256|
+(2 + 6)^2 - 30*2 + 9
+///
+13
+}}}
+
+{{{id=257|
+a = 3 # Las variables se inicializan con el signo =
+///
+}}}
+
+{{{id=258|
+2*a, a^2, 3*a - 2
+///
+(6, 9, 7)
+}}}
+
+{{{id=259|
+# operaciones con números racionales y coma flotante
+///
+}}}
+
+{{{id=260|
+4/7 + 8/3; 3/5 - 6/11; (3/4 - 4/5)^3 + (2/3) / (34/89)
+///
+68/21
+3/55
+711949/408000
+}}}
+
+{{{id=261|
+1.563 + 3.89; 1.456e25 / 2.456e-12
+///
+5.45300000000000
+5.92833876221498e36
+}}}
+
+{{{id=262|
+(1.123782)^100
+///
+117005.737177117
+}}}
+
+{{{id=263|
+"""
+Si en una expresión aparecen números racionales y decimales
+sage da el resultado en números decimales
+"""
+///
+}}}
+
+{{{id=264|
+4/5 + 0.87
+///
+1.67000000000000
+}}}
+
+{{{id=265|
+sqrt(4), sqrt(8), sqrt(32), sqrt(8.0)
+///
+(2, 2*sqrt(2), 4*sqrt(2), 2.82842712474619)
+}}}
+
+{{{id=266|
+1024^(1/4)    # La raíz cuarta
+///
+4*4^(1/4)
+}}}
+
+{{{id=267|
+1024^(1/7)
+///
+2*8^(1/7)
+}}}
+
+{{{id=269|
+# Tipos de datos
+///
+}}}
+
+{{{id=268|
+type(2) # el tipo mostrado con una función
+///
+<type 'sage.rings.integer.Integer'>
+}}}
+
+{{{id=270|
+(2/3).base_ring() # el tipo mostrado con un método
+///
+Rational Field
+}}}
+
+{{{id=271|
+type(2.5)
+///
+<type 'sage.rings.real_mpfr.RealLiteral'>
+}}}
+
+{{{id=272|
+"""
+Aquí tenemos pruebas reveladoras del funcionamiento de sage
+"""
+///
+}}}
+
+{{{id=273|
+a = 2
+///
+}}}
+
+{{{id=274|
+a.base_ring(); type(a)
+///
+Integer Ring
+<type 'sage.rings.integer.Integer'>
+}}}
+
+{{{id=276|
+a in ZZ, a in QQ, a in RR, a in CC   # la orden "in" es algo así como el pertenece
+///
+(True, True, True, True)
+}}}
+
+{{{id=277|
+a = 3/7
+///
+}}}
+
+{{{id=278|
+a.base_ring(); type(a)
+///
+Rational Field
+<type 'sage.rings.rational.Rational'>
+}}}
+
+{{{id=280|
+a in ZZ, a in QQ, a in RR, a in CC
+///
+(False, True, True, True)
+}}}
+
+{{{id=281|
+a = 1.53876
+///
+}}}
+
+{{{id=282|
+a.base_ring(); type(a)
+///
+Real Field with 53 bits of precision
+<type 'sage.rings.real_mpfr.RealLiteral'>
+}}}
+
+{{{id=283|
+a in ZZ, a in QQ, a in RR, a in CC #el número decimal también es racional para sage
+///
+(False, True, True, True)
+}}}
+
+{{{id=285|
+# Precisión
+///
+}}}
+
+{{{id=284|
+n(sqrt(2))    # Precision por defecto
+///
+1.41421356237310
+}}}
+
+{{{id=286|
+n(sqrt(2), digits=50) # Mayor precisión
+///
+1.4142135623730950488016887242096980785696718753769
+}}}
+
+{{{id=287|
+n(sqrt(2), digits=5)
+///
+1.4142
+}}}
+
+{{{id=288|
+sqrt(2).n() # Actuando como método
+///
+1.41421356237310
+}}}
+
+{{{id=289|
+sqrt(2).n(digits=30) # El modificador digits como método
+///
+1.41421356237309504880168872421
+}}}
+
+{{{id=290|
+a = 77/23; denominator(a); a.denominator()
+///
+23
+23
+}}}
+
+{{{id=291|
+a = -74/21; a.numerator(); a.denominator()
+///
+-74
+21
+}}}
+
+{{{id=292|
+# Aproximaciones
+///
+}}}
+
+{{{id=294|
+a = 3.67
+///
+}}}
+
+{{{id=293|
+a.round(), a.floor(), a.ceil()
+///
+(4, 3, 4)
+}}}
+
+{{{id=295|
+a = -3.898
+///
+}}}
+
+{{{id=296|
+a.round(), a.floor(), a.ceil()
+///
+(-4, -4, -3)
+}}}
+
+{{{id=297|
+a = 3456.876543
+///
+}}}
+
+{{{id=298|
+round(a), round(a,2), round(a,5)
+///
+(3457, 3456.88, 3456.87654)
+}}}
+
+{{{id=299|
+round(a,-1), round(a,-2), round(a,-4)
+///
+(3460.0, 3500.0, 0.0)
+}}}
+
+{{{id=300|
+#  La ayuda de sage
+///
+}}}
+
+{{{id=301|
+a = 7/3
+///
+}}}
+
+{{{id=302|
+a. # escribimos el objeto, un punto y pulsamos el tabulador
+///
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "_sage_input_60.py", line 10, in <module>
+    exec compile(u'open("___code___.py","w").write("# -*- coding: utf-8 -*-\\n" + _support_.preparse_worksheet_cell(base64.b64decode("YS4gIyBlc2NyaWJpbW9zIGVsIG9iamV0bywgdW4gcHVudG8geSBwdWxzYW1vcyBlbCB0YWJ1bGFkb3I="),globals())+"\\n"); execfile(os.path.abspath("___code___.py"))' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/private/var/folders/nn/zc4f_ypx5pq6twvr_8rb9vfh0000gn/T/tmphWWQgF/___code___.py", line 2
+    a. # escribimos el objeto, un punto y pulsamos el tabulador
+                                                              ^
+SyntaxError: invalid syntax
+}}}
+
+{{{id=303|
+"""
+aparece información de los métodos que pueden ser elegidos
+para aplicar a "a" y elegimos uno y pulsamos intro (si queremos 
+se puede con el ratón). Si es el último, escribimos () y evaluamos
+la celda. Para salir de la ayuda pulsamos "esc".
+"""
+///
+}}}
+
+{{{id=304|
+b=3
+///
+}}}
+
+{{{id=305|
+b.abs()
+///
+3
+}}}
+
+{{{id=306|
+abs(-3); abs(-b)==3
+///
+3
+True
+}}}
+
+{{{id=307|
+"""
+otra forma de pedir ayuda es escribir el nombre de un método seguido
+del símbolo de interrogación, seguidamente se pulsa el tabulador. Se 
+genera una amplia información.
+"""
+///
+}}}
+
+{{{id=308|
+gcd?
+///
+<html><!--notruncate-->
+
+<div class="docstring">
+    
+  <p><strong>File:</strong> /usr/lib/sagemath/local/lib/python2.7/site-packages/sage/rings/arith.py</p>
+<p><strong>Type:</strong> &lt;type &#8216;function&#8217;&gt;</p>
+<p><strong>Definition:</strong> gcd(a, b=None, **kwargs)</p>
+<p><strong>Docstring:</strong></p>
+<blockquote>
+<div><p>The greatest common divisor of a and b, or if a is a list and b is
+omitted the greatest common divisor of all elements of a.</p>
+<p>INPUT:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">a,b</span></tt> - two elements of a ring with gcd or</li>
+<li><tt class="docutils literal"><span class="pre">a</span></tt> - a list or tuple of elements of a ring with
+gcd</li>
+</ul>
+<p>Additional keyword arguments are passed to the respectively called
+methods.</p>
+<p>OUTPUT:</p>
+<p>The given elements are first coerced into a common parent. Then,
+their greatest common divisor <em>in that common parent</em> is returned.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">GCD</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">sage: </span><span class="n">GCD</span><span class="p">(</span><span class="mi">97</span><span class="o">*</span><span class="mi">10</span><span class="o">^</span><span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="o">^</span><span class="mi">20</span><span class="o">*</span><span class="mi">97</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">97</span>
+<span class="gp">sage: </span><span class="n">GCD</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">2/15</span>
+<span class="gp">sage: </span><span class="n">GCD</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<span class="go">2</span>
+<span class="gp">sage: </span><span class="n">GCD</span><span class="p">(</span><span class="n">srange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10000</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>  <span class="c"># fast  !!</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+<p>Note that to take the gcd of <span class="math">n</span> elements for <span class="math">n \not= 2</span> you must
+put the elements into a list by enclosing them in <tt class="docutils literal"><span class="pre">[..]</span></tt>.  Before
+#4988 the following wrongly returned 3 since the third parameter
+was just ignored:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">gcd</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="nc">TypeError</span>: <span class="n-Identifier">gcd() takes at most 2 arguments (3 given)</span>
+<span class="gp">sage: </span><span class="n">gcd</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+<p>Similarly, giving just one element (which is not a list) gives an error:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">gcd</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="nc">TypeError</span>: <span class="n-Identifier">&#39;sage.rings.integer.Integer&#39; object is not iterable</span>
+</pre></div>
+</div>
+<p>By convention, the gcd of the empty list is (the integer) 0:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">gcd</span><span class="p">([])</span>
+<span class="go">0</span>
+<span class="gp">sage: </span><span class="nb">type</span><span class="p">(</span><span class="n">gcd</span><span class="p">([]))</span>
+<span class="go">&lt;type &#39;sage.rings.integer.Integer&#39;&gt;</span>
+</pre></div>
+</div>
+<p>TESTS:</p>
+<p>The following shows that indeed coercion takes place before computing
+the gcd. This behaviour was introduced in trac ticket #10771:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">R</span><span class="o">.&lt;</span><span class="n">x</span><span class="o">&gt;=</span><span class="n">QQ</span><span class="p">[]</span>
+<span class="gp">sage: </span><span class="n">S</span><span class="o">.&lt;</span><span class="n">x</span><span class="o">&gt;=</span><span class="n">ZZ</span><span class="p">[]</span>
+<span class="gp">sage: </span><span class="n">p</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">random_element</span><span class="p">()</span>
+<span class="gp">sage: </span><span class="n">q</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">random_element</span><span class="p">()</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">gcd</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">))</span>
+<span class="go">Fraction Field of Univariate Polynomial Ring in x over Rational Field</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">gcd</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">]))</span>
+<span class="go">Fraction Field of Univariate Polynomial Ring in x over Rational Field</span>
+</pre></div>
+</div>
+<p>Make sure we try QQ and not merely ZZ (<a class="reference external" href="http://trac.sagemath.org/13014">trac ticket #13014</a>):</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="nb">bool</span><span class="p">(</span><span class="n">gcd</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span> <span class="o">==</span> <span class="n">gcd</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">SR</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">7</span><span class="p">)))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Make sure that the gcd of Expressions stays symbolic:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">gcd</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">Integer Ring</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">gcd</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">Symbolic Ring</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">gcd</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">SR</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="go">Symbolic Ring</span>
+<span class="gp">sage: </span><span class="n">parent</span><span class="p">(</span><span class="n">gcd</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">SR</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="go">Symbolic Ring</span>
+</pre></div>
+</div>
+<p>Verify that objects without gcd methods but which can&#8217;t be
+coerced to ZZ or QQ raise an error:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">F</span><span class="o">.&lt;</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">FreeMonoid</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">sage: </span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="nc">TypeError</span>: <span class="n-Identifier">unable to find gcd</span>
+</pre></div>
+</div>
+</div></blockquote>
+
+
+</div>
+</html>
+}}}
+
+{{{id=309|
+"""
+y si necesitamos información más extensa, escribimos
+dos símbolos de interrogación
+"""
+///
+}}}
+
+{{{id=310|
+gcd??
+///
+<html><!--notruncate-->
+
+<div class="docstring">
+    
+  <p><strong>File:</strong> /usr/lib/sagemath/local/lib/python2.7/site-packages/sage/rings/arith.py</p>
+<p><strong>Source Code</strong> (starting at line 1489):</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="s">r&quot;&quot;&quot;</span>
+<span class="s">    The greatest common divisor of a and b, or if a is a list and b is</span>
+<span class="s">    omitted the greatest common divisor of all elements of a.</span>
+
+<span class="s">    INPUT:</span>
+
+
+<span class="s">    -  ``a,b`` - two elements of a ring with gcd or</span>
+
+<span class="s">    -  ``a`` - a list or tuple of elements of a ring with</span>
+<span class="s">       gcd</span>
+
+
+<span class="s">    Additional keyword arguments are passed to the respectively called</span>
+<span class="s">    methods.</span>
+
+<span class="s">    OUTPUT:</span>
+
+<span class="s">    The given elements are first coerced into a common parent. Then,</span>
+<span class="s">    their greatest common divisor *in that common parent* is returned.</span>
+
+<span class="s">    EXAMPLES::</span>
+
+<span class="s">        sage: GCD(97,100)</span>
+<span class="s">        1</span>
+<span class="s">        sage: GCD(97*10^15, 19^20*97^2)</span>
+<span class="s">        97</span>
+<span class="s">        sage: GCD(2/3, 4/5)</span>
+<span class="s">        2/15</span>
+<span class="s">        sage: GCD([2,4,6,8])</span>
+<span class="s">        2</span>
+<span class="s">        sage: GCD(srange(0,10000,10))  # fast  !!</span>
+<span class="s">        10</span>
+
+<span class="s">    Note that to take the gcd of `n` elements for `n \not= 2` you must</span>
+<span class="s">    put the elements into a list by enclosing them in ``[..]``.  Before</span>
+<span class="s">    #4988 the following wrongly returned 3 since the third parameter</span>
+<span class="s">    was just ignored::</span>
+
+<span class="s">        sage: gcd(3,6,2)</span>
+<span class="s">        Traceback (most recent call last):</span>
+<span class="s">        ...</span>
+<span class="s">        TypeError: gcd() takes at most 2 arguments (3 given)</span>
+<span class="s">        sage: gcd([3,6,2])</span>
+<span class="s">        1</span>
+
+<span class="s">    Similarly, giving just one element (which is not a list) gives an error::</span>
+
+<span class="s">        sage: gcd(3)</span>
+<span class="s">        Traceback (most recent call last):</span>
+<span class="s">        ...</span>
+<span class="s">        TypeError: &#39;sage.rings.integer.Integer&#39; object is not iterable</span>
+
+<span class="s">    By convention, the gcd of the empty list is (the integer) 0::</span>
+
+<span class="s">        sage: gcd([])</span>
+<span class="s">        0</span>
+<span class="s">        sage: type(gcd([]))</span>
+<span class="s">        &lt;type &#39;sage.rings.integer.Integer&#39;&gt;</span>
+
+<span class="s">    TESTS:</span>
+
+<span class="s">    The following shows that indeed coercion takes place before computing</span>
+<span class="s">    the gcd. This behaviour was introduced in trac ticket #10771::</span>
+
+<span class="s">        sage: R.&lt;x&gt;=QQ[]</span>
+<span class="s">        sage: S.&lt;x&gt;=ZZ[]</span>
+<span class="s">        sage: p = S.random_element()</span>
+<span class="s">        sage: q = R.random_element()</span>
+<span class="s">        sage: parent(gcd(1/p,q))</span>
+<span class="s">        Fraction Field of Univariate Polynomial Ring in x over Rational Field</span>
+<span class="s">        sage: parent(gcd([1/p,q]))</span>
+<span class="s">        Fraction Field of Univariate Polynomial Ring in x over Rational Field</span>
+
+<span class="s">    Make sure we try QQ and not merely ZZ (:trac:`13014`)::</span>
+
+<span class="s">        sage: bool(gcd(2/5, 3/7) == gcd(SR(2/5), SR(3/7)))</span>
+<span class="s">        True</span>
+
+<span class="s">    Make sure that the gcd of Expressions stays symbolic::</span>
+
+<span class="s">        sage: parent(gcd(2, 4))</span>
+<span class="s">        Integer Ring</span>
+<span class="s">        sage: parent(gcd(SR(2), 4))</span>
+<span class="s">        Symbolic Ring</span>
+<span class="s">        sage: parent(gcd(2, SR(4)))</span>
+<span class="s">        Symbolic Ring</span>
+<span class="s">        sage: parent(gcd(SR(2), SR(4)))</span>
+<span class="s">        Symbolic Ring</span>
+
+<span class="s">    Verify that objects without gcd methods but which can&#39;t be</span>
+<span class="s">    coerced to ZZ or QQ raise an error::</span>
+
+<span class="s">        sage: F.&lt;a,b&gt; = FreeMonoid(2)</span>
+<span class="s">        sage: gcd(a,b)</span>
+<span class="s">        Traceback (most recent call last):</span>
+<span class="s">        ...</span>
+<span class="s">        TypeError: unable to find gcd</span>
+
+<span class="s">    &quot;&quot;&quot;</span>
+    <span class="c"># Most common use case first:</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">sage.structure.element</span> <span class="kn">import</span> <span class="n">get_coercion_model</span>
+        <span class="n">cm</span> <span class="o">=</span> <span class="n">get_coercion_model</span><span class="p">()</span>
+        <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">canonical_coercion</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">GCD</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">gcd</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">ZZ</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">ZZ</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;unable to find gcd&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">GCD</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">sage.structure.sequence</span> <span class="kn">import</span> <span class="n">Sequence</span>
+    <span class="n">seq</span> <span class="o">=</span> <span class="n">Sequence</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">universe</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">U</span> <span class="ow">is</span> <span class="n">ZZ</span> <span class="ow">or</span> <span class="n">U</span> <span class="ow">is</span> <span class="nb">int</span> <span class="ow">or</span> <span class="n">U</span> <span class="ow">is</span> <span class="nb">long</span><span class="p">:</span><span class="c"># ZZ.has_coerce_map_from(U):</span>
+        <span class="k">return</span> <span class="n">sage</span><span class="o">.</span><span class="n">rings</span><span class="o">.</span><span class="n">integer</span><span class="o">.</span><span class="n">GCD_list</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">__GCD_sequence</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+
+
+</div>
+</html>
+}}}
+
+{{{id=311|
+# Operadores booleanos
+///
+}}}
+
+{{{id=312|
+5 < 6; -5 > 6; 78 < 78; 78 <= 78
+///
+True
+False
+False
+True
+}}}
+
+{{{id=313|
+45 == 9 * 5       # El signo de comparación es == y no =
+///
+True
+}}}
+
+{{{id=314|
+78 != 78      # La negación de == es !=
+///
+False
+}}}
+
+{{{id=315|
+78 <> 78; 78 <> 123     # El símbolo <> es equivalente a !=
+///
+False
+True
+}}}
+
+{{{id=316|
+true and false
+///
+False
+}}}
+
+{{{id=317|
+true or false
+///
+True
+}}}
+
+{{{id=318|
+# Números Complejos
+///
+}}}
+
+{{{id=319|
+type(i)
+///
+<type 'sage.symbolic.expression.Expression'>
+}}}
+
+{{{id=320|
+type(3+4*i)
+///
+<type 'sage.symbolic.expression.Expression'>
+}}}
+
+{{{id=321|
+i^2
+///
+-1
+}}}
+
+{{{id=322|
+i = CC(i)
+///
+}}}
+
+{{{id=323|
+type(i)
+///
+<type 'sage.rings.complex_number.ComplexNumber'>
+}}}
+
+{{{id=324|
+type(3+4*i)
+///
+<type 'sage.rings.complex_number.ComplexNumber'>
+}}}
+
+{{{id=325|
+i^2
+///
+-1.00000000000000
+}}}
+
+{{{id=326|
+a, b=5+8*i, 3.4+9*i
+///
+}}}
+
+{{{id=328|
+a + b; a - b; a*b; a / b; a^5
+///
+8.40000000000000 + 17.0000000000000*I
+1.60000000000000 - 1.00000000000000*I
+-55.0000000000000 + 72.2000000000000*I
+0.961538461538461 - 0.192307692307692*I
+25525.0000000000 - 70232.0000000000*I
+}}}
+
+{{{id=339|
+
+///
+}}}
+
+{{{id=330|
+real(a); imag(a)
+///
+5.00000000000000
+8.00000000000000
+}}}
+
+{{{id=331|
+abs(a)    # abs aplicado a números complejos extrae el módulo
+///
+9.43398113205660
+}}}
+
+{{{id=332|
+c = conjugate(a); c
+///
+5.00000000000000 - 8.00000000000000*I
+}}}
+
+{{{id=333|
+a*c
+///
+89.0000000000000
+}}}
+
+{{{id=334|
+norm(a)    # la norma de un complejo es el producto suyo por su conjutado
+///
+89.0000000000000
+}}}
+
+{{{id=335|
+sqrt(norm(a)) == abs(a)    # la raíz cuadrada de la norma es abs
+///
+True
+}}}
+
+{{{id=336|
+a.norm().sqrt() == a.abs() # lo mismo de otra manera
+///
+True
+}}}
+
+{{{id=337|
+d = 1+i
+///
+}}}
+
+{{{id=338|
+arg(d)
+///
+0.785398163397448
+}}}
+
+{{{id=1|
+# Listas
+///
+}}}
+
+{{{id=2|
+a = ['toyota','honda',100,123]; a
+///
+['toyota', 'honda', 100, 123]
+}}}
+
+{{{id=3|
+a[0]; a[1]; a[2]; a[3]
+///
+'toyota'
+'honda'
+100
+123
+}}}
+
+{{{id=4|
+a[-1]; a[-2]; a[-3]; a[-4]
+///
+123
+100
+'honda'
+'toyota'
+}}}
+
+{{{id=5|
+a[0] == a[-4]
+///
+True
+}}}
+
+{{{id=6|
+a[1:-1]
+///
+['honda', 100]
+}}}
+
+{{{id=11|
+# Manipulación de posiciones en las listas
+///
+}}}
+
+{{{id=10|
+a[2] = a[2] - 1; a
+///
+['toyota', 'honda', 99, 123]
+}}}
+
+{{{id=7|
+a[0:2] = ['subaru','suzuki']; a
+///
+['subaru', 'suzuki', 99, 123]
+}}}
+
+{{{id=9|
+a[0:2] = ['datsun']; a
+///
+['datsun', 99, 123]
+}}}
+
+{{{id=12|
+a[:0] = ['lexus']; a
+///
+['lexus', 'datsun', 99, 123]
+}}}
+
+{{{id=13|
+a[:0] = a; a
+///
+['lexus', 'datsun', 99, 123, 'lexus', 'datsun', 99, 123]
+}}}
+
+{{{id=14|
+a[1:1] = ['nissan']
+///
+}}}
+
+{{{id=15|
+a
+///
+['lexus', 'nissan', 'datsun', 99, 123, 'lexus', 'datsun', 99, 123]
+}}}
+
+{{{id=16|
+a[:] = []; a
+///
+[]
+}}}
+
+{{{id=18|
+a.append('dome'); a
+///
+['dome']
+}}}
+
+{{{id=19|
+a + ['mitsubishi','isuzu']
+///
+['dome', 'mitsubishi', 'isuzu']
+}}}
+
+{{{id=20|
+q = ['mazda','daihatsu']; q
+///
+['mazda', 'daihatsu']
+}}}
+
+{{{id=21|
+b = ['lexus', q, 'subaru']; b
+///
+['lexus', ['mazda', 'daihatsu'], 'subaru']
+}}}
+
+{{{id=22|
+len(b)
+///
+3
+}}}
+
+{{{id=23|
+# range
+///
+}}}
+
+{{{id=24|
+range(10)
+///
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}}}
+
+{{{id=25|
+range(5,15)
+///
+[5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+}}}
+
+{{{id=26|
+range(5,15,2)
+///
+[5, 7, 9, 11, 13]
+}}}
+
+{{{id=27|
+range(100,15,-10)
+///
+[100, 90, 80, 70, 60, 50, 40, 30, 20]
+}}}
+
+{{{id=28|
+# más sobre listas
+///
+}}}
+
+{{{id=29|
+a = ['toyota','suzuki','honda','subaru','isuzu','daihatsu']; a
+///
+['toyota', 'suzuki', 'honda', 'subaru', 'isuzu', 'daihatsu']
+}}}
+
+{{{id=30|
+a.extend(['lexus','mazda']); a
+///
+['toyota', 'suzuki', 'honda', 'subaru', 'isuzu', 'daihatsu', 'lexus', 'mazda']
+}}}
+
+{{{id=31|
+a.insert(2,'nissan'); a
+///
+['toyota', 'suzuki', 'nissan', 'honda', 'subaru', 'isuzu', 'daihatsu', 'lexus', 'mazda']
+}}}
+
+{{{id=32|
+a.insert(2,'nissan'); a
+///
+['toyota', 'suzuki', 'nissan', 'nissan', 'honda', 'subaru', 'isuzu', 'daihatsu', 'lexus', 'mazda']
+}}}
+
+{{{id=33|
+a.remove('nissan'); a
+///
+['toyota', 'suzuki', 'nissan', 'honda', 'subaru', 'isuzu', 'daihatsu', 'lexus', 'mazda']
+}}}
+
+{{{id=34|
+a.insert(2,'nissan'); a
+///
+['toyota', 'suzuki', 'nissan', 'nissan', 'honda', 'subaru', 'isuzu', 'daihatsu', 'lexus', 'mazda']
+}}}
+
+{{{id=35|
+a.index('nissan')
+///
+2
+}}}
+
+{{{id=36|
+a.count('nissan')
+///
+2
+}}}
+
+{{{id=80|
+a; del(a[1]); a
+///
+['toyota', 'suzuki', 'nissan', 'nissan', 'honda', 'subaru', 'isuzu', 'daihatsu', 'lexus', 'mazda']
+['toyota', 'nissan', 'nissan', 'honda', 'subaru', 'isuzu', 'daihatsu', 'lexus', 'mazda']
+}}}
+
+{{{id=37|
+z = a; z
+///
+['toyota', 'nissan', 'nissan', 'honda', 'subaru', 'isuzu', 'daihatsu', 'lexus', 'mazda']
+}}}
+
+{{{id=38|
+z.sort(); z; a     # observar que cambia a z ... ¡y también a a!
+///
+['daihatsu', 'honda', 'isuzu', 'lexus', 'mazda', 'nissan', 'nissan', 'subaru', 'toyota']
+['daihatsu', 'honda', 'isuzu', 'lexus', 'mazda', 'nissan', 'nissan', 'subaru', 'toyota']
+}}}
+
+{{{id=40|
+x = sorted(a); x; a      # no cambia a a
+///
+['daihatsu', 'honda', 'isuzu', 'lexus', 'mazda', 'nissan', 'nissan', 'subaru', 'toyota']
+['daihatsu', 'honda', 'isuzu', 'lexus', 'mazda', 'nissan', 'nissan', 'subaru', 'toyota']
+}}}
+
+{{{id=41|
+x.reverse(); x
+///
+['toyota', 'subaru', 'nissan', 'nissan', 'mazda', 'lexus', 'isuzu', 'honda', 'daihatsu']
+}}}
+
+{{{id=42|
+x.pop(); x    # presenta el último elemento y lo quita de la lista
+///
+'daihatsu'
+['toyota', 'subaru', 'nissan', 'nissan', 'mazda', 'lexus', 'isuzu', 'honda']
+}}}
+
+{{{id=83|
+lst = range(10); lst
+///
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}}}
+
+{{{id=84|
+mst = lst.pop(3); mst; lst
+///
+3
+[0, 1, 2, 4, 5, 6, 7, 8, 9]
+}}}
+
+{{{id=85|
+nst = [1,2,3,5,8,5]; nst
+///
+[1, 2, 3, 5, 8, 5]
+}}}
+
+{{{id=86|
+nst.index(5)   # ofrece el índice de la primera ocurrencia de 5 en la lista nst
+///
+3
+}}}
+
+{{{id=87|
+Lista = [1, 'a', ['juan', 'pepe'], 'a']
+///
+}}}
+
+{{{id=88|
+Lista.index(1);  Lista.index(['juan', 'pepe']); Lista.index('a'); Lista.index('aa')
+///
+0
+2
+1
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "_sage_input_166.py", line 10, in <module>
+    exec compile(u'open("___code___.py","w").write("# -*- coding: utf-8 -*-\\n" + _support_.preparse_worksheet_cell(base64.b64decode("TGlzdGEuaW5kZXgoMSk7ICBMaXN0YS5pbmRleChbJ2p1YW4nLCAncGVwZSddKTsgTGlzdGEuaW5kZXgoJ2EnKTsgTGlzdGEuaW5kZXgoJ2FhJyk="),globals())+"\\n"); execfile(os.path.abspath("___code___.py"))' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/private/var/folders/hx/j2b91y393x91wvgf5mz2zlkm0000gn/T/tmpaFcErO/___code___.py", line 3, in <module>
+    exec compile(u"Lista.index(_sage_const_1 );  Lista.index(['juan', 'pepe']); Lista.index('a'); Lista.index('aa')" + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+ValueError: 'aa' is not in list
+}}}
+
+{{{id=43|
+'toyota' in x, 'honda' in x
+///
+(True, True)
+}}}
+
+{{{id=44|
+x; a
+///
+['toyota', 'subaru', 'nissan', 'nissan', 'mazda', 'lexus', 'isuzu', 'honda']
+['daihatsu', 'honda', 'isuzu', 'lexus', 'mazda', 'nissan', 'nissan', 'subaru', 'toyota']
+}}}
+
+{{{id=45|
+x += a; x
+///
+['toyota', 'subaru', 'nissan', 'nissan', 'mazda', 'lexus', 'isuzu', 'honda', 'daihatsu', 'honda', 'isuzu', 'lexus', 'mazda', 'nissan', 'nissan', 'subaru', 'toyota']
+}}}
+
+{{{id=46|
+# Multiplicadores
+///
+}}}
+
+{{{id=47|
+l1 = range(4); l1
+///
+[0, 1, 2, 3]
+}}}
+
+{{{id=48|
+l1 * 3
+///
+[0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3]
+}}}
+
+{{{id=49|
+l2 = range(3); l2
+///
+[0, 1, 2]
+}}}
+
+{{{id=50|
+l2 *= 2; l2
+///
+[0, 1, 2, 0, 1, 2]
+}}}
+
+{{{id=116|
+# bucles dobles
+///
+}}}
+
+{{{id=119|
+factor(40)
+///
+2^3 * 5
+}}}
+
+{{{id=117|
+misc.mul([(p-1)*p**(r-1) for p, r in factor(40)])
+///
+16
+}}}
+
+{{{id=118|
+mul([(p-1)*p**(r-1) for p, r in factor(40)])
+///
+16
+}}}
+
+{{{id=120|
+euler_phi(40)
+///
+16
+}}}
+
+{{{id=55|
+# Sobre string
+///
+}}}
+
+{{{id=52|
+[1,2] + list('34')   # convierte un string en una lista
+///
+[1, 2, '3', '4']
+}}}
+
+{{{id=54|
+nombre = "Hilaria Torres Orellana"
+///
+}}}
+
+{{{id=53|
+nombre.split(); nombre
+///
+['Hilaria', 'Torres', 'Orellana']
+'Hilaria Torres Orellana'
+}}}
+
+{{{id=56|
+l = ['Hilaria', 'Torres', 'Orellana']; l
+///
+['Hilaria', 'Torres', 'Orellana']
+}}}
+
+{{{id=57|
+' '.join(l)
+///
+'Hilaria Torres Orellana'
+}}}
+
+{{{id=58|
+l
+///
+['Hilaria', 'Torres', 'Orellana']
+}}}
+
+{{{id=59|
+'<->'.join(l)
+///
+'Hilaria<->Torres<->Orellana'
+}}}
+
+{{{id=62|
+# comparar listas
+///
+}}}
+
+{{{id=63|
+[1, 2, 3] == [1, 2, 3]
+///
+True
+}}}
+
+{{{id=64|
+[1, 2, 3] == [1, 3, 2]
+///
+False
+}}}
+
+{{{id=65|
+[1, 2, 3] < [1, 2, 3]
+///
+False
+}}}
+
+{{{id=66|
+[1, 2, 3] <= [1, 2, 3]
+///
+True
+}}}
+
+{{{id=67|
+[1, 2, 3] > [1, 2, 3]
+///
+False
+}}}
+
+{{{id=68|
+[1, 2, 3] > [1, 1, 2]
+///
+True
+}}}
+
+{{{id=69|
+[1, 2, 3] < [1, 1, 2]
+///
+False
+}}}
+
+{{{id=70|
+[1, 2, 3] < [1, 3, 2]
+///
+True
+}}}
+
+{{{id=71|
+# Más sobre creación de listas
+///
+}}}
+
+{{{id=72|
+[x^2 for x in range(5)]
+///
+[0, 1, 4, 9, 16]
+}}}
+
+{{{id=77|
+pagos = [['gasolina', 30], ['cena', 20], ['libros', 12]]; total = 0
+///
+}}}
+
+{{{id=75|
+for pago in pagos:
+    total += pago[1];
+///
+}}}
+
+{{{id=76|
+total
+///
+62
+}}}
+
+{{{id=124|
+# Ejemplos y Ejercicios
+///
+}}}
+
+{{{id=235|
+# Extraer de una lista las entradas que cumplen una condición
+///
+}}}
+
+{{{id=237|
+def f(x): 
+    return x % 2 != 0 and x % 3 != 0    # función booleana
+///
+}}}
+
+{{{id=238|
+def extractList(lst,g):    # lst puede ser una lista o un conjunto, pero devuelve una lista
+    return [x for x in lst if g(x)]
+///
+}}}
+
+{{{id=240|
+extractList(range(2,25),f)
+///
+[5, 7, 11, 13, 17, 19, 23]
+}}}
+
+{{{id=241|
+filter(f,[2..25])     # otra forma
+///
+[5, 7, 11, 13, 17, 19, 23, 25]
+}}}
+
+{{{id=79|
+# Restar a una lista otra y ordenar una lista sin repeticiones
+///
+}}}
+
+{{{id=89|
+l = range(5)
+///
+}}}
+
+{{{id=90|
+l *= 2; l
+///
+[0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
+}}}
+
+{{{id=125|
+l;uniq(l); l
+///
+[0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
+}}}
+
+{{{id=115|
+def sortSr(lista):
+    """
+    sortSr ordena una lista quitando de ella sus repeticiones
+    funciona con listas mixtas en cuanto a los tipos de sus
+    entradas y ¡funciona con la lista vacía!
+    """
+    resultado = []
+    k = len(lista) - 1
+    if len(lista):
+        lista.sort()
+        for i in range(k):
+            if lista[i]!= lista[i+1]: 
+                resultado.append(lista[i])
+        resultado.append(lista[k])
+    return resultado
+///
+}}}
+
+{{{id=127|
+l;sortSr(l); l
+///
+[0, 1, 2, 3, 4, 0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4]
+[0, 0, 1, 1, 2, 2, 3, 3, 4, 4]
+}}}
+
+{{{id=95|
+def minus_list(lst,mst):
+    """
+    minus_list borra de lst cada ocurrencia de los 
+    elementos que aparecen en mst
+    """
+    long_l = len(lst)
+    mst = uniq(mst)                        # como alternativa podríamos porner mst = sortSr(mst)
+    xst = [i for n in mst for i in range(long_l) if lst[i] == n]
+    return [lst[i] for i in range(long_l) if i not in xst]
+///
+}}}
+
+{{{id=102|
+minus_list([1,2,3,5,8,3,2,1,-5],[2,2,5,1])
+///
+[3, 8, 3, -5]
+}}}
+
+{{{id=103|
+minus_list([1,2,3,5,8,3,2,1,-5],[])
+///
+[1, 2, 3, 5, 8, 3, 2, 1, -5]
+}}}
+
+{{{id=107|
+minus_list([],[2,2,5,1])
+///
+[]
+}}}
+
+{{{id=126|
+"""
+Ejercicio:
+    1) Definir una función indices_ocurrencias(lst,n) que proporcione la lista de índices 
+    de lst correspondientes a sus entradas iguales a n.
+    2) Definir una función h(lst,mst) que presente ordenados los indices de las entradas
+       de lst que aparecen como entradas de mst.
+    3) Definir l = range(5), yuxtaponer l consigo mismo, definir t = []
+    4) Calcular indices_ocurrencias(l,3) e indices_ocurrencias(t,3)
+    5) Calcular h([1,2,3,5,3,2,1],[2,2,5,1])
+"""
+///
+}}}
+
+{{{id=129|
+# Conjuntos
+///
+}}}
+
+{{{id=147|
+"""
+Creación
+"""
+///
+}}}
+
+{{{id=130|
+V = Set([1,2,2,3,4]); V # pasa de conjunto a lista
+///
+{1, 2, 3, 4}
+}}}
+
+{{{id=209|
+list(V); V.list()       # el paso contrario
+///
+[1, 2, 3, 4]
+[1, 2, 3, 4]
+}}}
+
+{{{id=210|
+lst = V.list(); type(lst)
+///
+<type 'list'>
+}}}
+
+{{{id=134|
+N = Set(NN); N
+///
+Set of elements of Non negative integer semiring
+}}}
+
+{{{id=132|
+Z = Set(ZZ); Z
+///
+Set of elements of Integer Ring
+}}}
+
+{{{id=133|
+Q = Set(QQ); Q
+///
+Set of elements of Rational Field
+}}}
+
+{{{id=135|
+R = Set(RR); R
+///
+Set of elements of Real Field with 53 bits of precision
+}}}
+
+{{{id=138|
+C = Set(CC); C
+///
+Set of elements of Complex Field with 53 bits of precision
+}}}
+
+{{{id=136|
+X = Set(GF(9,'a')); X
+///
+{0, 1, 2, a, a + 1, a + 2, 2*a, 2*a + 1, 2*a + 2}
+}}}
+
+{{{id=143|
+P = Set(Primes()); P   # Creación por especificación
+///
+Set of all prime numbers: 2, 3, 5, 7, ...
+}}}
+
+{{{id=144|
+27 in P; 29 in P; 99991 in P; -27 in P
+///
+False
+True
+True
+False
+}}}
+
+{{{id=145|
+type(_) # cómo solicitar algo sobre el último resultado
+///
+<type 'bool'>
+}}}
+
+{{{id=220|
+P.first(); P.next(5); P.unrank(12)
+///
+2
+7
+41
+}}}
+
+{{{id=146|
+E = Set([]); E  # es la definición del conjunto vacío
+///
+{}
+}}}
+
+{{{id=137|
+lst = range(4)
+///
+}}}
+
+{{{id=139|
+L = Set(lst); L
+///
+{0, 1, 2, 3}
+}}}
+
+{{{id=140|
+lst.append(-1); lst; L
+///
+[0, 1, 2, 3, -1]
+{0, 1, 2, 3}
+}}}
+
+{{{id=141|
+-1 in lst; -1 in L
+///
+True
+False
+}}}
+
+{{{id=151|
+# Cardinal y otros
+///
+}}}
+
+{{{id=152|
+L.cardinality(); P.cardinality(); X.cardinality()
+///
+4
++Infinity
+9
+}}}
+
+{{{id=153|
+L.first()
+///
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "_sage_input_109.py", line 10, in <module>
+    exec compile(u'open("___code___.py","w").write("# -*- coding: utf-8 -*-\\n" + _support_.preparse_worksheet_cell(base64.b64decode("TC5maXJzdCgp"),globals())+"\\n"); execfile(os.path.abspath("___code___.py"))' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/tmp/tmpXmWUR7/___code___.py", line 2, in <module>
+    exec compile(u'L.first()' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "parent.pyx", line 650, in sage.structure.parent.Parent.__getattr__ (sage/structure/parent.c:6137)
+  File "misc.pyx", line 205, in sage.structure.misc.getattr_from_other_class (sage/structure/misc.c:1406)
+AttributeError: 'Set_object_enumerated_with_category' object has no attribute 'first'
+}}}
+
+{{{id=157|
+L.last
+///
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "_sage_input_108.py", line 10, in <module>
+    exec compile(u'open("___code___.py","w").write("# -*- coding: utf-8 -*-\\n" + _support_.preparse_worksheet_cell(base64.b64decode("TC5sYXN0"),globals())+"\\n"); execfile(os.path.abspath("___code___.py"))' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/tmp/tmp59xpHi/___code___.py", line 2, in <module>
+    exec compile(u'L.last' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "parent.pyx", line 650, in sage.structure.parent.Parent.__getattr__ (sage/structure/parent.c:6137)
+  File "misc.pyx", line 205, in sage.structure.misc.getattr_from_other_class (sage/structure/misc.c:1406)
+AttributeError: 'Set_object_enumerated_with_category' object has no attribute 'last'
+}}}
+
+{{{id=159|
+L.random_element()
+///
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "_sage_input_111.py", line 10, in <module>
+    exec compile(u'open("___code___.py","w").write("# -*- coding: utf-8 -*-\\n" + _support_.preparse_worksheet_cell(base64.b64decode("TC5yYW5kb21fZWxlbWVudCgp"),globals())+"\\n"); execfile(os.path.abspath("___code___.py"))' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/tmp/tmpsK8Edx/___code___.py", line 2, in <module>
+    exec compile(u'L.random_element()' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "parent.pyx", line 650, in sage.structure.parent.Parent.__getattr__ (sage/structure/parent.c:6137)
+  File "misc.pyx", line 205, in sage.structure.misc.getattr_from_other_class (sage/structure/misc.c:1406)
+AttributeError: 'Set_object_enumerated_with_category' object has no attribute 'random_element'
+}}}
+
+{{{id=160|
+L.list()
+///
+[0, 1, 2, 3]
+}}}
+
+{{{id=174|
+# Finitud
+///
+}}}
+
+{{{id=175|
+Set(QQ).is_finite()
+///
+False
+}}}
+
+{{{id=176|
+Set(GF(250037)).is_finite()
+///
+True
+}}}
+
+{{{id=177|
+Set(Integers(5)).is_finite()
+///
+True
+}}}
+
+{{{id=142|
+# Operaciones con conjuntos
+///
+}}}
+
+{{{id=164|
+# Partes
+///
+}}}
+
+{{{id=148|
+Partes = Set(Subsets([1,2,3])); Partes  # creamos el conjunto de partes de un conjunto
+///
+{{3}, {1, 2}, {}, {2, 3}, {1}, {1, 3}, {1, 2, 3}, {2}}
+}}}
+
+{{{id=149|
+S = Subsets([1,2,3]); S
+///
+Subsets of {1, 2, 3}
+}}}
+
+{{{id=150|
+S.first()
+///
+{}
+}}}
+
+{{{id=154|
+S.cardinality()
+///
+8
+}}}
+
+{{{id=155|
+S.last()
+///
+{1, 2, 3}
+}}}
+
+{{{id=156|
+S.random_element()
+///
+{1, 3}
+}}}
+
+{{{id=198|
+NN.an_element() # seleccionamos un elemento, debería de mostrar uno representativo
+///
+42
+}}}
+
+{{{id=158|
+S.list()
+///
+[{}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}, {1, 2, 3}]
+}}}
+
+{{{id=181|
+U = Set([1,2,3,4]); list(U.subsets())   # todos los subconjuntos de X
+///
+[{}, {1}, {2}, {3}, {4}, {1, 2}, {1, 3}, {1, 4}, {2, 3}, {2, 4}, {3, 4}, {1, 2, 3}, {1, 2, 4}, {1, 3, 4}, {2, 3, 4}, {1, 2, 3, 4}]
+}}}
+
+{{{id=182|
+U = Set([1,3,5]); W = Set([0,1,2,3,5,7])
+///
+}}}
+
+{{{id=183|
+U.issubset(W); W.issubset(U); U.issubset(U)
+///
+True
+False
+True
+}}}
+
+{{{id=199|
+U.issuperset(W); W.issuperset(U); U.issuperset(U)
+///
+False
+True
+True
+}}}
+
+{{{id=200|
+len([Z for Z in W.subsets() if Z.issuperset(U)])
+///
+8
+}}}
+
+{{{id=185|
+U = Set([1,2,3]); W = Set([0,1,2,5,7])
+///
+}}}
+
+{{{id=184|
+X = Set([Z for Z in W.subsets() if Z.issubset(U)]); X; X.cardinality()
+///
+{{1, 2}, {}, {2}, {1}}
+4
+}}}
+
+{{{id=187|
+z = [Z for Z in W.subsets() if Z.issubset(U)]; z; len(z)
+///
+[{}, {1}, {2}, {1, 2}]
+4
+}}}
+
+{{{id=161|
+S = Subsets(3, 2); S    # Subconjuntos de {1, 2, 3} de tamaño 2
+///
+Subsets of {1, 2, 3} of size 2
+}}}
+
+{{{id=188|
+W1 = [Z for Z in W.subsets() if (Z.issubset(U) and 2 in Z)]; W1
+///
+[{2}, {1, 2}]
+}}}
+
+{{{id=189|
+list(X.subsets())
+///
+[{}, {{1, 2}}, {{}}, {{2}}, {{1}}, {{1, 2}, {}}, {{1, 2}, {2}}, {{1, 2}, {1}}, {{}, {2}}, {{}, {1}}, {{2}, {1}}, {{1, 2}, {}, {2}}, {{1, 2}, {}, {1}}, {{1, 2}, {2}, {1}}, {{}, {2}, {1}}, {{1, 2}, {}, {2}, {1}}]
+}}}
+
+{{{id=190|
+list(X.subsets(2)) # seleccionamos los subconjuntos de dos elementos
+///
+[{{1, 2}, {}}, {{1, 2}, {2}}, {{1, 2}, {1}}, {{}, {2}}, {{}, {1}}, {{2}, {1}}]
+}}}
+
+{{{id=162|
+S = Subsets([1,2,3]); S.random_element()
+///
+{1, 3}
+}}}
+
+{{{id=165|
+# Diferencia
+///
+}}}
+
+{{{id=163|
+A = Set([1,2,3]).difference(Set([3,4])); A
+///
+{1, 2}
+}}}
+
+{{{id=166|
+X = Set(NN).difference(Primes()); X
+///
+Set-theoretic difference between Set of elements of Non negative integer semiring and Set of all prime numbers: 2, 3, 5, 7, ...
+}}}
+
+{{{id=167|
+4 in X, 3 in X, 2^2 in X, 12/3 in X
+///
+(True, False, True, True)
+}}}
+
+{{{id=201|
+# Unión
+///
+}}}
+
+{{{id=202|
+Set(QQ).union(Set(ZZ))
+///
+Set-theoretic union of Set of elements of Rational Field and Set of elements of Integer Ring
+}}}
+
+{{{id=203|
+Set(QQ) + Set(ZZ) # otra forma
+///
+Set-theoretic union of Set of elements of Rational Field and Set of elements of Integer Ring
+}}}
+
+{{{id=204|
+X = Set(QQ).union(Set(GF(3))); X
+///
+Set-theoretic union of Set of elements of Rational Field and {0, 1, 2}
+}}}
+
+{{{id=205|
+2/3 in X; GF(3)(2) in X; GF(5)(2) in X
+///
+True
+True
+False
+}}}
+
+{{{id=206|
+Set(GF(7)) + Set(GF(3))
+///
+{0, 1, 2, 3, 4, 5, 6, 1, 2, 0}
+}}}
+
+{{{id=168|
+# Intersección
+///
+}}}
+
+{{{id=169|
+A1 = Set([1,2,3]).intersection(Set([3,4])); A1
+///
+{3}
+}}}
+
+{{{id=170|
+X1 = Set(ZZ).intersection(Primes()); X1
+///
+Set-theoretic intersection of Set of elements of Integer Ring and Set of all prime numbers: 2, 3, 5, 7, ...
+}}}
+
+{{{id=171|
+4 in X1, 3 in X1, 2^2 in X1, 12/3 in X1
+///
+(False, True, False, False)
+}}}
+
+{{{id=207|
+# Diferencia simétrica
+///
+}}}
+
+{{{id=208|
+X = Set([1,2,3]).symmetric_difference(Set([3,4])); X
+///
+{1, 2, 4}
+}}}
+
+{{{id=173|
+# Limitaciones
+///
+}}}
+
+{{{id=193|
+C = IntegerListsLex(4, length=3); C
+///
+Integer lists of sum 4 satisfying certain constraints
+}}}
+
+{{{id=194|
+D = [p for p in C]; D
+///
+[[4, 0, 0], [3, 1, 0], [3, 0, 1], [2, 2, 0], [2, 1, 1], [2, 0, 2], [1, 3, 0], [1, 2, 1], [1, 1, 2], [1, 0, 3], [0, 4, 0], [0, 3, 1], [0, 2, 2], [0, 1, 3], [0, 0, 4]]
+}}}
+
+{{{id=195|
+K=Set(D)
+///
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "_sage_input_186.py", line 10, in <module>
+    exec compile(u'open("___code___.py","w").write("# -*- coding: utf-8 -*-\\n" + _support_.preparse_worksheet_cell(base64.b64decode("Sz1TZXQoRCk="),globals())+"\\n"); execfile(os.path.abspath("___code___.py"))' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/tmp/tmpv7uwLw/___code___.py", line 2, in <module>
+    exec compile(u'K=Set(D)' + '\n', '', 'single')
+  File "", line 1, in <module>
+    
+  File "/usr/lib/sagemath/local/lib/python2.7/site-packages/sage/sets/set.py", line 119, in Set
+    return Set_object_enumerated(frozenset(X))
+TypeError: unhashable type: 'list'
+}}}
+
+{{{id=218|
+G = Set(p for p in C)
+///
+}}}
+
+{{{id=219|
+[4,0,0] in G
+///
+True
+}}}
+
+{{{id=340|
+# Producto Cartesiano
+///
+}}}
+
+{{{id=341|
+cp = CartesianProduct([1,2], [3,4]); cp
+///
+Cartesian product of [1, 2], [3, 4]
+}}}
+
+{{{id=342|
+K = cp.list(); K
+///
+[[1, 3], [1, 4], [2, 3], [2, 4]]
+}}}
+
+{{{id=343|
+CartesianProduct(ZZ, QQ).cardinality()
+///
++Infinity
+}}}
+
+{{{id=344|
+CartesianProduct(ZZ, []).cardinality()
+///
+0
+}}}
+
+{{{id=345|
+CartesianProduct(ZZ, QQ).is_finite()
+///
+False
+}}}
+
+{{{id=346|
+CartesianProduct(ZZ, []).is_finite()
+///
+True
+}}}
+
+{{{id=347|
+CartesianProduct(range(3), range(3)).list()
+///
+[[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]]
+}}}
+
+{{{id=348|
+CartesianProduct('dog', 'cat').list()
+///
+[['d', 'c'], ['d', 'a'], ['d', 't'], ['o', 'c'], ['o', 'a'], ['o', 't'], ['g', 'c'], ['g', 'a'], ['g', 't']]
+}}}
+
+{{{id=349|
+CartesianProduct('dog', 'cat').random_element()
+///
+['o', 'a']
+}}}
+
+{{{id=350|
+C = CartesianProduct(xrange(1000), xrange(1000), xrange(1000))
+///
+}}}
+
+{{{id=351|
+C[238792368]
+///
+[238, 792, 368]
+}}}
+
+{{{id=352|
+FF = IntegerModRing(29)
+///
+}}}
+
+{{{id=353|
+C1 = CartesianProduct(FF, FF, FF)
+///
+}}}
+
+{{{id=196|
+# Importar un método
+///
+}}}
+
+{{{id=211|
+from sage.sets.set import is_Set
+///
+}}}
+
+{{{id=212|
+is_Set([1,2,3])
+///
+False
+}}}
+
+{{{id=213|
+is_Set(Set([1,2,3]))
+///
+True
+}}}
+
+{{{id=214|
+is_Set(QQ)
+///
+False
+}}}
+
+{{{id=215|
+is_Set(Set(QQ))
+///
+True
+}}}
+
+{{{id=216|
+is_Set(Primes())
+///
+True
+}}}
+
+{{{id=217|
+# Particiones
+///
+}}}
+
+{{{id=221|
+SetPartitions(3).list()    # lista de las particiones de un conjunto de 3 elementos
+///
+[{{1, 2, 3}}, {{2, 3}, {1}}, {{1, 3}, {2}}, {{1, 2}, {3}}, {{2}, {3}, {1}}]
+}}}
+
+{{{id=222|
+SetPartitions(3).cardinality()    # número de particiones de un conjunto de 3 elementos
+///
+5
+}}}
+
+{{{id=223|
+SetPartitions(4, [2,1,1]).list() # Hay 6 particiones de {1,2,3,4} con conjuntos de cardinal [2, 1, 1]
+///
+[{{3, 4}, {2}, {1}}, {{2, 4}, {3}, {1}}, {{4}, {2, 3}, {1}}, {{1, 4}, {2}, {3}}, {{1, 3}, {4}, {2}}, {{1, 2}, {4}, {3}}]
+}}}
+
+{{{id=224|
+SetPartitions(7, [3,3,1]).cardinality()
+///
+70
+}}}
+
+{{{id=225|
+S = [1,2,3,4]
+///
+}}}
+
+{{{id=226|
+SetPartitions(S,2) # Conjunto de las particiones de S en dos partes
+///
+Set partitions of [1, 2, 3, 4] with 2 parts
+}}}
+
+{{{id=227|
+SetPartitions(S,2).cardinality()
+///
+7
+}}}
+
+{{{id=228|
+SetPartitions(S,2).list()
+///
+[{{2, 3, 4}, {1}}, {{1, 3, 4}, {2}}, {{3}, {1, 2, 4}}, {{4}, {1, 2, 3}}, {{3, 4}, {1, 2}}, {{2, 4}, {1, 3}}, {{2, 3}, {1, 4}}]
+}}}
+
+{{{id=229|
+SetPartitions([1,2,3,4], [3,1]).list() # particiones de S en 3+1
+///
+[{{2, 3, 4}, {1}}, {{1, 3, 4}, {2}}, {{3}, {1, 2, 4}}, {{4}, {1, 2, 3}}]
+}}}
+
+{{{id=230|
+SetPartitions('aabcd').cardinality()
+///
+52
+}}}
+
+{{{id=231|
+SetPartitions('abcde').cardinality()
+///
+52
+}}}
+
+{{{id=232|
+SetPartitions(4).cardinality() == bell_number(4)
+///
+True
+}}}
+
+{{{id=233|
+SetPartitions(5, 3).cardinality() == stirling_number2(5,3)
+///
+True
+}}}
+
+{{{id=234|
+"""
+Ejercicio:
+    Dar dos formas de extraer de un conjunto A los elementos que cumplan una condición
+    booleana c
+"""
+///
+}}}
+
+{{{id=243|
+
+///
+}}}

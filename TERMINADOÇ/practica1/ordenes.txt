@@ -1,0 +1,18 @@
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:3 -out privkey-ID.pem
+
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:3 -out privkey-fmgo.pem
+
+openssl pkey -in privkey-ID.pem -text
+
+openssl pkey -in privkey-fmgo.pem -text
+
+openssl pkey -in privkey-fmgo.pem -outpubkey-ID.pem -pubout
+
+
+
+
+
+
+fichero
+
+openssl pkey -in privkey-ID.pem -outpubkey-ID.pem -pubout
